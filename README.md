@@ -42,13 +42,13 @@ struct packet
 }
 ```
 
-    a. **PacketType** field indicates the type (numeric code) of the packet, i.e., ACK or Data or EOT.
+**PacketType** field indicates the type (numeric code) of the packet, i.e., ACK or Data or EOT.
     
-    b. **SeqNum** field is a sequence number used to number data packets.
+**SeqNum** field is a sequence number used to number data packets.
     
-    c. **AckNum** field is used to indicate the previous data packet being acknowledged and the next expected sequence number.
+**AckNum** field is used to indicate the previous data packet being acknowledged and the next expected sequence number.
     
-    d. **WindowSize** field would typically be used at the start of the session to establish the number of packets that will be sent from the transmitter to the receiver
+**WindowSize** field would typically be used at the start of the session to establish the number of packets that will be sent from the transmitter to the receiver.
 
 - The basic protocol is Send-and-Wait (Stop-and-Wait), however it's a modified version in which:
     * the sliding window is used to send multiple frames rather than single frames, 
