@@ -4,6 +4,7 @@ This project contains design and implementation of a basic Send-And-Wait Protoco
 
 The following text diagram depicts the model:
 
+```
 --------------> -----------------> ------------>
 
 +-------------+------------------+-------------+
@@ -12,7 +13,7 @@ The following text diagram depicts the model:
 +-------------+------------------+-------------+
 
 <------------- <----------------- <------------
-
+```
 
 **Note:** The arrows depict the data flow.
 
