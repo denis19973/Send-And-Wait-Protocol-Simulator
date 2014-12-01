@@ -10,7 +10,7 @@ public class Network
     private Configuration configuration;
 
     /**
-     * Constructor the network module.
+     * Construct the network module.
      * 
      * @param configuration the configuration file.
      */
@@ -18,5 +18,7 @@ public class Network
     {
         this.configuration = configuration;
     }
+    
+    
 
 }
