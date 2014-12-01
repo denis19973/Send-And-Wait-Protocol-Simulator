@@ -1,9 +1,11 @@
 package sawProtocolSimulator;
 
+import java.io.Serializable;
+
 /**
  * This class contains the structure of a packet.
  */
-public class Packet
+public class Packet implements Serializable
 {
     /**
      * The type of packet, can either be:
