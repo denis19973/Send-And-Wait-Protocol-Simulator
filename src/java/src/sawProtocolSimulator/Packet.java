@@ -27,6 +27,11 @@ public class Packet
      * Acknowledgement Number.
      */
     private int ackNum;
+    
+    /**
+     * Data to be sent in the packet.
+     */
+    private String data;
 
     /**
      * Default Constructor.
@@ -34,6 +39,8 @@ public class Packet
     public Packet() {}
 
     /**
+     * Get the packet type.
+     * 
      * @return the packetType
      */
     public int getPacketType()
@@ -42,6 +49,8 @@ public class Packet
     }
 
     /**
+     * Set the packet type.
+     * 
      * @param packetType the packetType to set
      */
     public void setPacketType(int packetType)
@@ -50,6 +59,8 @@ public class Packet
     }
 
     /**
+     * Get the sequence number.
+     * 
      * @return the seqNum
      */
     public int getSeqNum()
@@ -58,6 +69,8 @@ public class Packet
     }
 
     /**
+     * Set the sequence number.
+     * 
      * @param seqNum the seqNum to set
      */
     public void setSeqNum(int seqNum)
@@ -66,6 +79,8 @@ public class Packet
     }
 
     /**
+     * Get the window size.
+     * 
      * @return the windowSize
      */
     public int getWindowSize()
@@ -74,6 +89,8 @@ public class Packet
     }
 
     /**
+     * Set the window size
+     * 
      * @param windowSize the windowSize to set
      */
     public void setWindowSize(int windowSize)
@@ -82,6 +99,8 @@ public class Packet
     }
 
     /**
+     * Get the Acknowledgement Number
+     * 
      * @return the ackNum
      */
     public int getAckNum()
@@ -90,6 +109,8 @@ public class Packet
     }
 
     /**
+     * Set the acknowledgement number.
+     * 
      * @param ackNum the ackNum to set
      */
     public void setAckNum(int ackNum)
@@ -97,6 +118,24 @@ public class Packet
         this.ackNum = ackNum;
     }
 
-    
-    
+    /**
+     * Get the data in a packet.
+     * 
+     * @return the data
+     */
+    public String getData()
+    {
+        return data;
+    }
+
+    /**
+     * Set the data in a packet.
+     * 
+     * @param data the data to set
+     */
+    public void setData(String data)
+    {
+        this.data = data;
+    }
+
 }
