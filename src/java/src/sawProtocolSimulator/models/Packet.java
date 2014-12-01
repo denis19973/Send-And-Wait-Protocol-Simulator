@@ -1,4 +1,4 @@
-package sawProtocolSimulator;
+package sawProtocolSimulator.models;
 
 import java.io.Serializable;
 
