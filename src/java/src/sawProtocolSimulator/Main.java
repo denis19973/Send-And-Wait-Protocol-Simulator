@@ -54,8 +54,12 @@ public class Main
                 System.exit(0);
         }
         
+        return;
     }
     
+    /**
+     * Creates and executes the network emulator.
+     */
     public static void createNetworkModule()
     {
         //If network module, read the network configuration and create the object.
