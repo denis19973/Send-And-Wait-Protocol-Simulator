@@ -126,4 +126,14 @@ public class Configuration
         this.receiverPort = receiverPort;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return "Configuration [sender=" + sender + ", senderPort=" + senderPort + ", receiver="
+                + receiver + ", receiverPort=" + receiverPort + "]";
+    }
+
 }
