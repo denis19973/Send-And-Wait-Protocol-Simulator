@@ -1,13 +1,22 @@
 package sawProtocolSimulator;
 
+import sawProtocolSimulator.models.Configuration;
+
 public class Network
 {
     /**
-     * The drop rate.
-     * 
-     * A random number will be generated for each packet received and if that random number is below
-     * or equal to this drop rate, that packet will be dropped.
+     * Configuration for the network module.
      */
-    private int dropRate;
-    
+    private Configuration configuration;
+
+    /**
+     * Constructor the network module.
+     * 
+     * @param configuration the configuration file.
+     */
+    public Network(Configuration configuration)
+    {
+        this.configuration = configuration;
+    }
+
 }

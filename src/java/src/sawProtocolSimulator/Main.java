@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.Properties;
 
+import sawProtocolSimulator.exceptions.CouldNotReadConfigurationException;
 import sawProtocolSimulator.models.Configuration;
 
 public class Main

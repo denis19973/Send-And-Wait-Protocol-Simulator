@@ -1,4 +1,4 @@
-package sawProtocolSimulator;
+package sawProtocolSimulator.exceptions;
 
 public class CouldNotReadConfigurationException extends Exception
 {
