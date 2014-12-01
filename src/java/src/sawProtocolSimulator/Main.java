@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.Properties;
+import java.util.Scanner;
 
 import sawProtocolSimulator.exceptions.CouldNotReadConfigurationException;
 import sawProtocolSimulator.models.Configuration;
@@ -21,20 +22,60 @@ public class Main
     public static void main(String[] args)
     {
         //Ask user what this current instance will be: sender, receiver or network module.
+        System.out.println("Welcome to the Send And Wait Protocol Simulator (Java Version)..!");
+        System.out.println("You can be one of the following: ");
+        System.out.println("1) Enter 1 to be a Sender");
+        System.out.println("2) Enter 2 to be a Receiver");
+        System.out.println("3) Enter 3 to be the Network Emulator");
+        System.out.print("What would you like the current instance of the program to be (1-3):\t");
         
+        Scanner scan = new Scanner(System.in);
+        int choice = scan.nextInt();
+        
+        switch(choice)
+        {
+            case 1:
+                //be the sender
+                
+                break;
+            case 2:
+                //be the receiver
+
+                break;
+            case 3:
+                //be the network emulator
+                createNetworkModule();
+                
+                break;
+            default:
+                System.out.println("You didn't enter a valid option. Now exiting!");
+                
+                //LOG
+                System.exit(0);
+        }
+        
+    }
+    
+    public static void createNetworkModule()
+    {
         //If network module, read the network configuration and create the object.
         try
         {
             Configuration configuration = networkConfiguration();
+            Network networkModule = new Network(configuration);
+            
+            networkModule.takeInput();
+            networkModule.printConfiguration();
+            
+            //run network module
         }
         catch (CouldNotReadConfigurationException e)
         {
             //LOG
             
             //critical thing failed, close the program.
-            return;
+            System.exit(0);
         }
-        
     }
 
     /**
