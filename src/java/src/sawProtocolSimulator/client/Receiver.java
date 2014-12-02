@@ -43,8 +43,8 @@ public class Receiver extends Client
         return PacketUtilities.makePacket(this.configuration.getTransmitterAddress()
                 .getHostAddress(), this.configuration.getTransmitterPort(), this.configuration
                 .getReceiverAddress().getHostAddress(), this.configuration.getReceiverPort(),
-                packetType, this.currentSequenceNumber, this.currentSequenceNumber, this.configuration
-                        .getWindowSize());
+                packetType, this.currentSequenceNumber, this.currentSequenceNumber,
+                this.configuration.getWindowSize());
 
     }
 
