@@ -176,6 +176,86 @@ public class Packet implements Serializable
         this.data = data;
     }
 
+    /**
+     * Get the destination address.
+     * 
+     * @return the destinationAddress
+     */
+    public String getDestinationAddress()
+    {
+        return destinationAddress;
+    }
+
+    /**
+     * Set the destination address.
+     * 
+     * @param destinationAddress the destinationAddress to set
+     */
+    public void setDestinationAddress(String destinationAddress)
+    {
+        this.destinationAddress = destinationAddress;
+    }
+
+    /**
+     * Get the destination port.
+     * 
+     * @return the destinationPort
+     */
+    public int getDestinationPort()
+    {
+        return destinationPort;
+    }
+
+    /**
+     * Set the destination port.
+     * 
+     * @param destinationPort the destinationPort to set
+     */
+    public void setDestinationPort(int destinationPort)
+    {
+        this.destinationPort = destinationPort;
+    }
+
+    /**
+     * Get the source address.
+     * 
+     * @return the sourceAddress
+     */
+    public String getSourceAddress()
+    {
+        return sourceAddress;
+    }
+
+    /**
+     * Set the source address.
+     * 
+     * @param sourceAddress the sourceAddress to set
+     */
+    public void setSourceAddress(String sourceAddress)
+    {
+        this.sourceAddress = sourceAddress;
+    }
+
+    /**
+     * Get the source port.
+     * 
+     * @return the sourcePort
+     */
+    public int getSourcePort()
+    {
+        return sourcePort;
+    }
+
+    /**
+     * Set the source port.
+     * 
+     * @param sourcePort the sourcePort to set
+     */
+    public void setSourcePort(int sourcePort)
+    {
+        this.sourcePort = sourcePort;
+    }
+
     /*
      * (non-Javadoc)
      * 
