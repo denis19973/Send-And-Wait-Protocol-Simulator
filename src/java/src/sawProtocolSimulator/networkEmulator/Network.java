@@ -9,6 +9,7 @@ import java.util.Scanner;
 import sawProtocolSimulator.models.NetworkConfiguration;
 import sawProtocolSimulator.models.Packet;
 import sawProtocolSimulator.network.UDPNetwork;
+import sawProtocolSimulator.utilities.PacketUtilities;
 
 public class Network
 {
@@ -56,18 +57,24 @@ public class Network
             if(packet.getPacketType() == 1 || packet.getPacketType() == 4)
             {
                 UDPNetwork.sendPacket(socket, packet);
+                System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
             }
             else
             {
                 //if packet drop rate is lower than the threshold, drop it.
                 if(this.getDropRateThreshold() <= this.dropRate)
                 {
-                    System.out.println();
+                    System.out.println(PacketUtilities.generatePacketLog(packet, true, false));
                 }
                 else
                 {
                     //packet drop rate is greater than the threshold, let it go through.
                     
+                    //delay the packet by averageDelayPerPacket
+                    
+                    UDPNetwork.sendPacket(socket, packet);
+                    
+                    System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
                 }
             }
         }
