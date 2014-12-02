@@ -146,7 +146,10 @@ public class Receiver extends Client
                 Log.d(PacketUtilities.generateClientPacketLog(sotPacket, false));
 
                 // send SOT back to signify receive.
-                this.sendPacket(this.makePacket(PacketUtilities.PACKET_START_OF_TRANSMISSION));
+                Packet packet = this.makePacket(PacketUtilities.PACKET_START_OF_TRANSMISSION);
+                this.sendPacket(packet);
+                
+                Log.d(PacketUtilities.generateClientPacketLog(packet, true));
             }
             else
             {

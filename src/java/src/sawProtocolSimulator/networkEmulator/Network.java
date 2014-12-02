@@ -42,12 +42,22 @@ public class Network
         int totalPacketsDropped = 0;
         int totalPacketsForwarded = 0;
 
+        DatagramSocket socket = null;
+        try
+        {
+            socket = UDPNetwork.createServer(9000);
+        }
+        catch (SocketException e)
+        {
+            Log.d(e.getMessage());
+            System.exit(0); // fatal
+        }
+        
         // run forever - basically
         while (runNetwork)
         {
             try
             {
-                DatagramSocket socket = UDPNetwork.createServer(9000);
                 Packet packet = UDPNetwork.getPacket(socket);
 
                 totalPackets++;
@@ -84,11 +94,6 @@ public class Network
                 Log.d("[NETWORK] Total packets:           " + totalPackets);
                 Log.d("[NETWORK] Total packets dropped:   " + totalPacketsDropped);
                 Log.d("[NETWORK] Total packets forwarded: " + totalPacketsForwarded);
-            }
-            catch (SocketException e)
-            {
-                Log.d(e.getMessage());
-                System.exit(0); // fatal
             }
             catch (ClassNotFoundException e)
             {
