@@ -114,20 +114,6 @@ public class Sender extends Client
         this.sendPacket(packet);
 
         Log.d(PacketUtilities.generateClientPacketLog(packet, true));
-    }
-
-    /**
-     * Send the packet to end the transmission.
-     */
-    private void sendEndOfTransmissionPacket()
-    {
-        // create an EOT packet.
-        Packet packet = this.makePacket(PacketUtilities.PACKET_END_OF_TRANSMISSION);
-
-        // send the packet
-        this.sendPacket(packet);
-
-        Log.d(PacketUtilities.generateClientPacketLog(packet, true));
 
         // wait for SOT packet from receiver
         try
@@ -154,6 +140,20 @@ public class Sender extends Client
         {
             Log.d(e.getMessage());
         }
+    }
+
+    /**
+     * Send the packet to end the transmission.
+     */
+    private void sendEndOfTransmissionPacket()
+    {
+        // create an EOT packet.
+        Packet packet = this.makePacket(PacketUtilities.PACKET_END_OF_TRANSMISSION);
+
+        // send the packet
+        this.sendPacket(packet);
+
+        Log.d(PacketUtilities.generateClientPacketLog(packet, true));
     }
 
     @Override
