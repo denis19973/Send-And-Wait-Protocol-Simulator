@@ -80,9 +80,6 @@ public class Receiver extends Client
                         Packet ackPacket = this.makePacket(PacketUtilities.PACKET_ACK);
                         this.sendPacket(ackPacket);
 
-                        // add to list of ack'ed packets
-                        this.ackedPackets.add(packet);
-
                         // if packet hasn't been ACK'ed before.
                         if (!this.findIfPacketAckedBefore(packet.getSeqNum()))
                         {
@@ -96,6 +93,9 @@ public class Receiver extends Client
                             totalDuplicateAcks++;
                             Log.d(PacketUtilities.generateClientResendLog(packet, false));
                         }
+
+                        // add to list of ack'ed packets
+                        this.ackedPackets.add(packet);
 
                         break;
                 }
