@@ -92,7 +92,7 @@ public class Sender extends Client
         }
 
         // when all window packets sent, send EOT
-        
+
     }
 
     /**
@@ -110,7 +110,7 @@ public class Sender extends Client
     /**
      * Send the packet to end the transmission.
      */
-    private void sentEndOfTransmissionPacket()
+    private void sendEndOfTransmissionPacket()
     {
         //create an EOT packet.
         Packet packet = this.makePacket(PacketUtilities.PACKET_END_OF_TRANSMISSION);
