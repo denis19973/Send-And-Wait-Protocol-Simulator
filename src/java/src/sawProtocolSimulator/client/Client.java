@@ -157,6 +157,8 @@ public abstract class Client
         // set all configuration
         setConfiguration(networkAddress, networkPort, transmitterAddress, transmitterPort,
                 receiverAddress, receiverPort, maxPacketsToSend, windowSize, maxTimeout);
+        
+        scan.close();
 
     }
 
