@@ -64,17 +64,29 @@ public class PacketUtilities
         return packet;
     }
     
-    public static String generatePacketLog(Packet packet, boolean forwarded)
+    /**
+     * Generates a generic packet log. This can be put on the screen or in the log files.
+     * 
+     * @param packet the packet to generate the logs for
+     * @param network if this was called from the network module
+     * @param forwarded if the packet was forwarded or dropped.
+     * 
+     * @return a generic packet log
+     */
+    public static String generatePacketLog(Packet packet, boolean network, boolean forwarded)
     {
         StringBuilder log = new StringBuilder();
 
-        if(forwarded)
+        if(network)
         {
-            log.append("[FORWARDED] ");
-        }
-        else
-        {
-            log.append("[DROPPED]   ");
+            if(forwarded)
+            {
+                log.append("[FORWARDED] ");
+            }
+            else
+            {
+                log.append("[DROPPED]   ");
+            }
         }
         
         log.append("Packet Type: ");
