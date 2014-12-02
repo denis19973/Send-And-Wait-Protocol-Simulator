@@ -5,11 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.Scanner;
 
 import sawProtocolSimulator.exceptions.CouldNotReadConfigurationException;
-import sawProtocolSimulator.models.Configuration;
+import sawProtocolSimulator.models.NetworkConfiguration;
+import sawProtocolSimulator.network.Network;
 
 public class Main
 {
@@ -65,7 +67,7 @@ public class Main
         //If network module, read the network configuration and create the object.
         try
         {
-            Configuration configuration = networkConfiguration();
+            NetworkConfiguration configuration = networkConfiguration();
             Network networkModule = new Network(configuration);
             
             networkModule.takeInput();
@@ -88,11 +90,11 @@ public class Main
      * @return Configuration the configuration parsed from the config file; null if nothing read.
      * @throws CouldNotReadConfigurationException if the file cannot be parsed.
      */
-    public static Configuration networkConfiguration() throws CouldNotReadConfigurationException
+    public static NetworkConfiguration networkConfiguration() throws CouldNotReadConfigurationException
     {
         Properties networkProperties = new Properties();
         InputStream fileInputStream = null;
-        Configuration configuration = new Configuration();
+        NetworkConfiguration configuration = new NetworkConfiguration();
         
         try
         {
@@ -114,6 +116,12 @@ public class Main
             e.printStackTrace();
             
             throw new CouldNotReadConfigurationException("Couldn't read the configuration file.");
+        }
+        catch (UnknownHostException e)
+        {
+            e.printStackTrace();
+            
+            //network module isn't reachable. throw this.
         }
         catch (IOException e)
         {

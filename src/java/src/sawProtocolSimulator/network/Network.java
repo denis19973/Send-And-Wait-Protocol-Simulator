@@ -1,15 +1,15 @@
-package sawProtocolSimulator;
+package sawProtocolSimulator.network;
 
 import java.util.Scanner;
 
-import sawProtocolSimulator.models.Configuration;
+import sawProtocolSimulator.models.NetworkConfiguration;
 
 public class Network
 {
     /**
      * Configuration for the network module.
      */
-    private Configuration configuration;
+    private NetworkConfiguration configuration;
 
     /**
      * The drop rate.
@@ -31,7 +31,7 @@ public class Network
      * 
      * @param configuration the configuration file.
      */
-    public Network(Configuration configuration)
+    public Network(NetworkConfiguration configuration)
     {
         this.configuration = configuration;
     }
@@ -45,7 +45,7 @@ public class Network
     {
         System.out.println("Packet Drop Rate (1 and 100)");
         System.out.println("=================================");
-        System.out.println(" A random number between 1 and 100 will be generated for "
+        System.out.println("A random number between 1 and 100 will be generated for "
                 + "each packet received and if that random number "
                 + "is below or equal to this drop rate, that packet will be dropped.");
         System.out.print("\nEnter Drop Rate (1-100):\t");
@@ -58,7 +58,7 @@ public class Network
         System.out.println("This is the average delay per packet. Each packet will "
                 + "be delayed by the time interval specified here."
                 + "\nExample delay: 0.01 seconds");
-        System.out.println("\nEnter Average Delay Per Packet (in seconds):\t");
+        System.out.print("\nEnter Average Delay Per Packet (in seconds):\t");
         this.averageDelayPerPacket = scan.nextDouble();
     }
 

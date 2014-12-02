@@ -2,7 +2,7 @@ package sawProtocolSimulator.models;
 
 import java.net.InetAddress;
 
-public class Configuration
+public class NetworkConfiguration
 {
     /**
      * The Address of the transmitter (sender).
@@ -27,18 +27,18 @@ public class Configuration
     /**
      * Default constructor.
      */
-    public Configuration()
+    public NetworkConfiguration()
     {}
 
     /**
-     * Creates a Configuration object.
+     * Creates a Network Configuration object.
      * 
      * @param sender Sender Address
      * @param senderPort Sender Port
      * @param receiver Receiver Address
      * @param receiverPort Receiver Port
      */
-    public Configuration(InetAddress sender, int senderPort, InetAddress receiver, int receiverPort)
+    public NetworkConfiguration(InetAddress sender, int senderPort, InetAddress receiver, int receiverPort)
     {
         this.sender = sender;
         this.senderPort = senderPort;
