@@ -41,6 +41,26 @@ public class Packet implements Serializable
     private String data;
 
     /**
+     * Destination Address.
+     */
+    private String destinationAddress;
+
+    /**
+     * Destination Port.
+     */
+    private String destinationPort;
+
+    /**
+     * Source Address.
+     */
+    private String sourceAddress;
+
+    /**
+     * Source Port.
+     */
+    private String sourcePort;
+
+    /**
      * Default Constructor.
      */
     public Packet()
