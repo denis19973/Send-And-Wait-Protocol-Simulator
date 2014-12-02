@@ -37,6 +37,14 @@ public class Network
     }
     
     /**
+     * The main runner..where all the main Network emulation occurs!
+     */
+    public void run()
+    {
+        
+    }
+    
+    /**
      * Scan configuration from the user.
      * 
      * Takes in the packet drop rate and average delay per packet.
