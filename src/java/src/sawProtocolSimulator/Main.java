@@ -38,6 +38,7 @@ public class Main
 
         Scanner scan = new Scanner(System.in);
         int choice = scan.nextInt();
+        scan.close();
 
         switch (choice)
         {
