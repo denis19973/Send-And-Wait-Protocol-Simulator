@@ -10,26 +10,31 @@ public class Packet implements Serializable
     /**
      * The type of packet, can either be:
      * 
-     * - LEAD (when acquiring the channel) - SYN - ACK - EOT (when telling the other side that the
-     * transmission has ended)
+     * - 1 = SOT (when acquiring the channel - start of transmission)
+     * 
+     * - 2 = DATA (data packet)
+     * 
+     * - 3 = ACK (acknowledgement of a data packet)
+     * 
+     * - 4 = EOT (when telling the other side that the transmission has ended)
      */
-    private int packetType;
+    private int    packetType;
 
     /**
      * Sequence Number.
      */
-    private int seqNum;
+    private int    seqNum;
 
     /**
      * Window Size.
      */
-    private int windowSize;
+    private int    windowSize;
 
     /**
      * Acknowledgement Number.
      */
-    private int ackNum;
-    
+    private int    ackNum;
+
     /**
      * Data to be sent in the packet.
      */
@@ -38,7 +43,8 @@ public class Packet implements Serializable
     /**
      * Default Constructor.
      */
-    public Packet() {}
+    public Packet()
+    {}
 
     /**
      * Get the packet type.
@@ -140,7 +146,9 @@ public class Packet implements Serializable
         this.data = data;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
