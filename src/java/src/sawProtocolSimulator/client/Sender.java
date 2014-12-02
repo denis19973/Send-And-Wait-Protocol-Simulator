@@ -50,7 +50,7 @@ public class Sender extends Client
         // create a SOT packet
         Packet packet = this.makePacket(PacketUtilities.PACKET_START_OF_TRANSMISSION);
 
-        //send the packet
+        // send the packet
         this.sendPacket(packet);
     }
 
@@ -69,7 +69,7 @@ public class Sender extends Client
                 this.sequenceNumber, this.sequenceNumber, this.configuration.getWindowSize());
 
     }
-    
+
     /**
      * Send a packet to the network emulator.
      * 
@@ -96,5 +96,5 @@ public class Sender extends Client
             e.printStackTrace();
         }
     }
-    
+
 }

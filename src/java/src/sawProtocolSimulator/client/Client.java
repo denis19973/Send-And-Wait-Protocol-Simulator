@@ -11,7 +11,7 @@ public abstract class Client
     /**
      * Current client mode..since this is a half-duplex protocol.
      */
-    private ClientMode          mode;
+    private ClientMode            mode;
 
     /**
      * Configuration of the network module.
@@ -93,21 +93,21 @@ public abstract class Client
 
         // ######################################################### //
 
-        System.out.println("Max Packets to Send");
-        System.out.println("===================================");
-        System.out.println("The maximum number of packets that will be sent!");
-        System.out.print("\nEnter maximum number of packets here:\t");
-
-        int maxPacketsToSend = scan.nextInt();
-
-        // ######################################################### //
-
         System.out.println("Window Size");
         System.out.println("===================================");
         System.out.println("The size of our window!");
         System.out.print("\nEnter window size here:\t");
 
         int windowSize = scan.nextInt();
+
+        // ######################################################### //
+
+        System.out.println("Max Packets to Send");
+        System.out.println("===================================");
+        System.out.println("The maximum number of packets that will be sent!");
+        System.out.print("\nEnter maximum number of packets here:\t");
+
+        int maxPacketsToSend = scan.nextInt();
 
         // ######################################################### //
 
