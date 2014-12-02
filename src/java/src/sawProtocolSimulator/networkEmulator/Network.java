@@ -50,12 +50,14 @@ public class Network
                 DatagramSocket socket = UDPNetwork.createServer(9000);
                 Packet packet = UDPNetwork.getPacket(socket);
 
+                totalPackets++;
+                
                 // if it's a control packet, let it go through.
                 if (packet.getPacketType() == 1 || packet.getPacketType() == 4)
                 {
                     UDPNetwork.sendPacket(socket, packet);
                     Log.d(PacketUtilities.generateNetworkPacketLog(packet, true));
-                    totalPackets++;
+                    totalPacketsForwarded++;
                 }
                 else
                 {
