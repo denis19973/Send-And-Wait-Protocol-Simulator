@@ -20,21 +20,6 @@ public class Network
     private NetworkConfiguration configuration;
 
     /**
-     * The drop rate.
-     * 
-     * A random number between 1 and 100 will be generated for each packet received and if that
-     * random number is lower than or equal to this drop rate, that packet will be dropped.
-     */
-    private int                  dropRate;
-
-    /**
-     * The average delay per packet (in milliseconds).
-     * 
-     * In seconds: example: 5 ms.
-     */
-    private int                  averageDelayPerPacket;
-
-    /**
      * Construct the network module.
      * 
      * @param configuration the configuration file.
@@ -186,46 +171,5 @@ public class Network
                 + this.configuration.getReceiverPort());
         System.out.println("\n\n");
     }
-
-    /**
-     * Get the drop rate.
-     * 
-     * @return the dropRate
-     */
-    public int getDropRate()
-    {
-        return dropRate;
-    }
-
-    /**
-     * Set the drop rate.
-     * 
-     * @param dropRate the dropRate to set
-     */
-    public void setDropRate(int dropRate)
-    {
-        this.dropRate = dropRate;
-    }
-
-    /**
-     * Get the average delay per packet.
-     * 
-     * @return the averageDelayPerPacket
-     */
-    public int getAverageDelayPerPacket()
-    {
-        return averageDelayPerPacket;
-    }
-
-    /**
-     * Set the average delay per packet.
-     * 
-     * @param averageDelayPerPacket the averageDelayPerPacket to set
-     */
-    public void setAverageDelayPerPacket(int averageDelayPerPacket)
-    {
-        this.averageDelayPerPacket = averageDelayPerPacket;
-    }
-    
     
 }

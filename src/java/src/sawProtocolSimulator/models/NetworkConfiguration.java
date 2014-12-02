@@ -25,6 +25,21 @@ public class NetworkConfiguration
     private int         receiverPort;
 
     /**
+     * The drop rate.
+     * 
+     * A random number between 1 and 100 will be generated for each packet received and if that
+     * random number is lower than or equal to this drop rate, that packet will be dropped.
+     */
+    private int         dropRate;
+
+    /**
+     * The average delay per packet (in milliseconds).
+     * 
+     * In seconds: example: 5 ms.
+     */
+    private int         averageDelayPerPacket;
+
+    /**
      * Default constructor.
      */
     public NetworkConfiguration()
@@ -37,13 +52,18 @@ public class NetworkConfiguration
      * @param senderPort Sender Port
      * @param receiver Receiver Address
      * @param receiverPort Receiver Port
+     * @param dropRate Drop Rate
+     * @param averageDelayPerPacket Average Delay Per Packet
      */
-    public NetworkConfiguration(InetAddress sender, int senderPort, InetAddress receiver, int receiverPort)
+    public NetworkConfiguration(InetAddress sender, int senderPort, InetAddress receiver,
+            int receiverPort, int dropRate, int averageDelayPerPacket)
     {
         this.sender = sender;
         this.senderPort = senderPort;
         this.receiver = receiver;
         this.receiverPort = receiverPort;
+        this.dropRate = dropRate;
+        this.averageDelayPerPacket = averageDelayPerPacket;
     }
 
     /**
@@ -126,14 +146,57 @@ public class NetworkConfiguration
         this.receiverPort = receiverPort;
     }
 
-    /* (non-Javadoc)
+    /**
+     * Get the drop rate.
+     * 
+     * @return the dropRate
+     */
+    public int getDropRate()
+    {
+        return dropRate;
+    }
+
+    /**
+     * Set the drop rate.
+     * 
+     * @param dropRate the dropRate to set
+     */
+    public void setDropRate(int dropRate)
+    {
+        this.dropRate = dropRate;
+    }
+
+    /**
+     * Get the average delay per packet.
+     * 
+     * @return the averageDelayPerPacket
+     */
+    public int getAverageDelayPerPacket()
+    {
+        return averageDelayPerPacket;
+    }
+
+    /**
+     * Set the average delay per packet.
+     * 
+     * @param averageDelayPerPacket the averageDelayPerPacket to set
+     */
+    public void setAverageDelayPerPacket(int averageDelayPerPacket)
+    {
+        this.averageDelayPerPacket = averageDelayPerPacket;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString()
     {
-        return "Configuration [sender=" + sender + ", senderPort=" + senderPort + ", receiver="
-                + receiver + ", receiverPort=" + receiverPort + "]";
+        return "NetworkConfiguration [sender=" + sender + ", senderPort=" + senderPort
+                + ", receiver=" + receiver + ", receiverPort=" + receiverPort + ", dropRate="
+                + dropRate + ", averageDelayPerPacket=" + averageDelayPerPacket + "]";
     }
 
 }
