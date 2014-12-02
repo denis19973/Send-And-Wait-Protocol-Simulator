@@ -48,54 +48,66 @@ public class Network
      */
     public void run()
     {
-        try
+        //run switch for the loop
+        boolean runNetwork = true;
+        
+        //stats
+        int totalPackets = 0;
+        int totalPacketsDropped = 0;
+        int totalPacketsForwarded = 0;
+        
+        //run forever - basically
+        while(runNetwork)
         {
-            DatagramSocket socket = UDPNetwork.createServer(9000);
-            Packet packet = UDPNetwork.getPacket(socket);
+            try
+            {
+                DatagramSocket socket = UDPNetwork.createServer(9000);
+                Packet packet = UDPNetwork.getPacket(socket);
 
-            // if it's a control packet, let it go through.
-            if (packet.getPacketType() == 1 || packet.getPacketType() == 4)
-            {
-                UDPNetwork.sendPacket(socket, packet);
-                System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
-            }
-            else
-            {
-                // if packet drop rate is lower than the threshold, drop it.
-                if (this.getDropRateThreshold() <= this.dropRate)
+                // if it's a control packet, let it go through.
+                if (packet.getPacketType() == 1 || packet.getPacketType() == 4)
                 {
-                    System.out.println(PacketUtilities.generatePacketLog(packet, true, false));
+                    UDPNetwork.sendPacket(socket, packet);
+                    System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
                 }
                 else
                 {
-                    // packet drop rate is greater than the threshold, let it go through.
+                    // if packet drop rate is lower than the threshold, drop it.
+                    if (this.getDropRateThreshold() <= this.dropRate)
+                    {
+                        System.out.println(PacketUtilities.generatePacketLog(packet, true, false));
+                    }
+                    else
+                    {
+                        // packet drop rate is greater than the threshold, let it go through.
 
-                    // delay the packet by averageDelayPerPacket
-                    Thread.sleep(this.averageDelayPerPacket);
+                        // delay the packet by averageDelayPerPacket
+                        Thread.sleep(this.averageDelayPerPacket);
 
-                    UDPNetwork.sendPacket(socket, packet);
+                        UDPNetwork.sendPacket(socket, packet);
 
-                    System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
+                        System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
+                    }
                 }
             }
-        }
-        catch (SocketException e)
-        {
-            // socket wasn't created, log and crash the program.
-        }
-        catch (ClassNotFoundException e)
-        {
-            // class wasn't read while reading from the UDP network. Ignore and move (natural
-            // noise).
-        }
-        catch (IOException e)
-        {
-            // couldn't read from the socket.
-        }
-        catch (InterruptedException e)
-        {
-            // TODO Auto-generated catch block - for thread.
-            e.printStackTrace();
+            catch (SocketException e)
+            {
+                // socket wasn't created, log and crash the program.
+            }
+            catch (ClassNotFoundException e)
+            {
+                // class wasn't read while reading from the UDP network. Ignore and move (natural
+                // noise).
+            }
+            catch (IOException e)
+            {
+                // couldn't read from the socket.
+            }
+            catch (InterruptedException e)
+            {
+                // TODO Auto-generated catch block - for thread.
+                e.printStackTrace();
+            }
         }
     }
 
