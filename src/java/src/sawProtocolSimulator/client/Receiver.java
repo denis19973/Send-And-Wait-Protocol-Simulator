@@ -31,6 +31,7 @@ public class Receiver extends Client
     {
         super(clientMode);
         this.currentSequenceNumber = 0;
+        this.ackedPackets = new ArrayList<Packet>();
     }
 
     @Override
