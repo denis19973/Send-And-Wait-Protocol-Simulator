@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import sawProtocolSimulator.models.ClientConfiguration;
 
-public class Client
+public abstract class Client
 {
     /**
      * Current client mode..since this is a half-duplex protocol.
@@ -28,6 +28,11 @@ public class Client
         this.mode = clientMode;
     }
 
+    /**
+     * The main runner..where all the client running occurs (either sending or receiving).
+     */
+    public abstract void run();
+    
     /**
      * Scan some configuration from the user.
      * 
@@ -67,7 +72,7 @@ public class Client
         }
 
     }
-    
+
     /**
      * Prints all configuration for the Client Module.
      */
