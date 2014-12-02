@@ -1,5 +1,9 @@
 package sawProtocolSimulator.client;
 
+import java.util.ArrayList;
+
+import sawProtocolSimulator.models.Packet;
+
 public class Sender extends Client
 {
 
@@ -11,6 +15,11 @@ public class Sender extends Client
     private int sequenceNumber;
     
     /**
+     * The current packet window.
+     */
+    private ArrayList<Packet> packetWindow;
+    
+    /**
      * Create a client, whose sole purpose is to send (transmit) to the receiver.
      * 
      * @param clientMode the client mode.
@@ -19,6 +28,7 @@ public class Sender extends Client
     {
         super(clientMode);
         this.sequenceNumber = 0;
+        this.packetWindow = new ArrayList<Packet>();
     }
 
     @Override
