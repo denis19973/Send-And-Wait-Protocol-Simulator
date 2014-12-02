@@ -195,8 +195,6 @@ public abstract class Client
             // send packet to the network emulator
             UDPNetwork.sendPacket(socket, packet, this.configuration.getNetworkAddress(),
                     this.configuration.getNetworkPort());
-
-            Log.d(PacketUtilities.generateClientPacketLog(packet, true));
         }
         catch (SocketException e)
         {
