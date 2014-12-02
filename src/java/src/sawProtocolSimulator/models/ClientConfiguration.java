@@ -35,7 +35,7 @@ public class ClientConfiguration
     private int         receiverPort;
 
     /**
-     * The maximum number of packets that we're going to send.
+     * The maximum number of packets that will be sent.
      */
     private int         maxPacketsToSend;
 
@@ -59,7 +59,7 @@ public class ClientConfiguration
      * @param transmitterPort the port number of the transmitter (sender)
      * @param receiverAddress the address of the receiver
      * @param receiverPort the port number of the receiver
-     * @param maxPacketsToSend the maximum number of packets that we're going to send
+     * @param maxPacketsToSend the maximum number of packets that will be sent.
      * @param windowSize the size of our window.
      */
     public ClientConfiguration(InetAddress networkAddress, int networkPort,

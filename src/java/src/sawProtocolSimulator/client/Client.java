@@ -93,14 +93,45 @@ public abstract class Client
 
         // ######################################################### //
 
+        System.out.println("Max Packets to Send");
+        System.out.println("===================================");
+        System.out.println("The maximum number of packets that will be sent!");
+        System.out.print("\nEnter maximum number of packets here:\t");
+
+        int maxPacketsToSend = scan.nextInt();
+
+        // ######################################################### //
+
+        System.out.println("Window Size");
+        System.out.println("===================================");
+        System.out.println("The size of our window!");
+        System.out.print("\nEnter window size here:\t");
+
+        int windowSize = scan.nextInt();
+
+        // ######################################################### //
+
         // set all configuration
         setConfiguration(networkAddress, networkPort, transmitterAddress, transmitterPort,
-                receiverAddress, receiverPort);
+                receiverAddress, receiverPort, maxPacketsToSend, windowSize);
 
     }
-
+    
+    /**
+     * Sets the client configuration object with the scanned details.
+     * 
+     * @param networkAddress address of the network emulator
+     * @param networkPort address of the network port
+     * @param transmitterAddress address of the transmitter
+     * @param transmitterPort port number of the transmitter
+     * @param receiverAddress address of the receiver
+     * @param receiverPort port number of the receiver
+     * @param maxPacketsToSend max packets that will be sent
+     * @param windowSize the window size
+     */
     private void setConfiguration(String networkAddress, int networkPort,
-            String transmitterAddress, int transmitterPort, String receiverAddress, int receiverPort)
+            String transmitterAddress, int transmitterPort, String receiverAddress,
+            int receiverPort, int maxPacketsToSend, int windowSize)
     {
         try
         {
@@ -110,6 +141,8 @@ public abstract class Client
             this.configuration.setTransmitterPort(transmitterPort);
             this.configuration.setReceiverAddress(InetAddress.getByName(receiverAddress));
             this.configuration.setReceiverPort(receiverPort);
+            this.configuration.setMaxPacketsToSend(maxPacketsToSend);
+            this.configuration.setWindowSize(windowSize);
 
         }
         catch (UnknownHostException e)
