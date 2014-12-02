@@ -120,6 +120,8 @@ public class Main
         catch (UnknownHostException e)
         {
             e.printStackTrace();
+            e.getCause(); //this is the cause
+            e.getMessage(); //this is the message
             
             //network module isn't reachable. throw this.
         }
