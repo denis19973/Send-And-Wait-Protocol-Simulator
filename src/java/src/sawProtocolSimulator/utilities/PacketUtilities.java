@@ -9,24 +9,24 @@ public class PacketUtilities
      * 
      * Send when acquiring a channel.
      */
-    public static int PACKET_START_OF_TRANSMISSION = 1;
+    public static final int PACKET_START_OF_TRANSMISSION = 1;
 
     /**
      * Data packet.
      */
-    public static int PACKET_DATA                  = 2;
+    public static final int PACKET_DATA                  = 2;
 
     /**
      * ACK packet.
      */
-    public static int PACKET_ACK                   = 3;
+    public static final int PACKET_ACK                   = 3;
 
     /**
      * The end of transmission packet.
      * 
      * Telling the other side that the transmission has ended.
      */
-    public static int PACKET_END_OF_TRANSMISSION   = 4;
+    public static final int PACKET_END_OF_TRANSMISSION   = 4;
 
     /**
      * Generates a packet with the details provided.
