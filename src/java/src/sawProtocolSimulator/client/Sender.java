@@ -84,10 +84,10 @@ public class Sender extends Client
                 {
                     // set timer and after it's over, check for ACK's.
                     this.setTimerForACKs();
-                }
 
-                Log.d("Window Status: " + packetWindow.size()
-                        + " packets left in the current window!");
+                    Log.d("Window Status: " + packetWindow.size()
+                            + " packets left in the current window!");
+                }
             }
 
             // windowSize number of more packets have been sent
@@ -178,11 +178,11 @@ public class Sender extends Client
             // add it to the window
             this.packetWindow.add(packet);
 
-            // increment the sequence number
-            this.sequenceNumber++;
-
             // send the packet
             this.sendPacket(packet);
+
+            // increment the sequence number
+            this.sequenceNumber++;
         }
     }
 
