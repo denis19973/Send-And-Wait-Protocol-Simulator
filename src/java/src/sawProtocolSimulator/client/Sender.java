@@ -118,6 +118,17 @@ public class Sender extends Client
 
         // send the packet
         this.sendPacket(packet);
+        
+        try
+        {
+            //wait for 2.5 seconds before sending data packets.
+            Thread.sleep(2500);
+        }
+        catch (InterruptedException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -65,11 +65,17 @@ public class Receiver extends Client
     {
         try
         {
+           
             Packet sotPacket = UDPNetwork.getPacket(this.listen);
             
             if(sotPacket.getPacketType() == PacketUtilities.PACKET_START_OF_TRANSMISSION)
             {
                 //TODO: print SOT packet.
+            }
+            else 
+            {
+                //TODO: exception..close receiver.
+                //crash client - didn't get SOT
             }
         }
         catch (ClassNotFoundException e)
