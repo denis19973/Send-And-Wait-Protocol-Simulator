@@ -45,6 +45,11 @@ public class ClientConfiguration
     private int         windowSize;
 
     /**
+     * The maximum timeout duration until a packet can remain unACKed.
+     */
+    private int         maxTimeout;
+
+    /**
      * Default constructor.
      */
     public ClientConfiguration()
@@ -61,10 +66,11 @@ public class ClientConfiguration
      * @param receiverPort the port number of the receiver
      * @param maxPacketsToSend the maximum number of packets that will be sent.
      * @param windowSize the size of our window.
+     * @param maxTimeout the maximum timeout duration until a packet can remain unACKed.
      */
     public ClientConfiguration(InetAddress networkAddress, int networkPort,
             InetAddress transmitterAddress, int transmitterPort, InetAddress receiverAddress,
-            int receiverPort, int maxPacketsToSend, int windowSize)
+            int receiverPort, int maxPacketsToSend, int windowSize, int maxTimeout)
     {
         this.networkAddress = networkAddress;
         this.networkPort = networkPort;
@@ -74,6 +80,7 @@ public class ClientConfiguration
         this.receiverPort = receiverPort;
         this.maxPacketsToSend = maxPacketsToSend;
         this.windowSize = windowSize;
+        this.maxTimeout = maxTimeout;
     }
 
     /**
@@ -235,5 +242,27 @@ public class ClientConfiguration
     {
         this.windowSize = windowSize;
     }
+
+    /**
+     * Gets the maximum timeout duration until a packet can remain unACKed.
+     * 
+     * @return the maxTimeout
+     */
+    public int getMaxTimeout()
+    {
+        return maxTimeout;
+    }
+
+    /**
+     * Sets the maximum timeout duration until a packet can remain unACKed.
+     * 
+     * @param maxTimeout the maxTimeout to set
+     */
+    public void setMaxTimeout(int maxTimeout)
+    {
+        this.maxTimeout = maxTimeout;
+    }
+
+
 
 }
