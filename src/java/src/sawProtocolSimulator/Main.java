@@ -74,6 +74,7 @@ public class Main
             networkModule.printConfiguration();
             
             //run network module
+            networkModule.run();
         }
         catch (CouldNotReadConfigurationException e)
         {
