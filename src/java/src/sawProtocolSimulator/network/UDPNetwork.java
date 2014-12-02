@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
 
 import sawProtocolSimulator.models.Packet;
@@ -83,9 +84,12 @@ public class UDPNetwork
         objectOutputStream.close();
 
         dataBytes = byteArrayOutputStream.toByteArray();
+
+        InetAddress destinationAddress = InetAddress.getByName(packet.getDestinationAddress());
+
         DatagramPacket datagramPacket =
-                new DatagramPacket(dataBytes, dataBytes.length, socket.getInetAddress(),
-                        socket.getPort());
+                new DatagramPacket(dataBytes, dataBytes.length, destinationAddress,
+                        packet.getDestinationPort());
 
         socket.send(datagramPacket);
 
