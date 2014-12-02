@@ -1,5 +1,6 @@
 package sawProtocolSimulator.exceptions;
 
+@SuppressWarnings("serial")
 public class CouldNotReadConfigurationException extends Exception
 {
     
