@@ -120,14 +120,8 @@ public class Sender extends Client
         this.sendPacket(packet);
     }
 
-    /**
-     * Creates a packet from the configuration, sequence number, packet type and other details.
-     * 
-     * @param packetType the type of packet to make
-     * 
-     * @return a Packet
-     */
-    private Packet makePacket(int packetType)
+    @Override
+    protected Packet makePacket(int packetType)
     {
         return PacketUtilities.makePacket(this.configuration.getReceiverAddress().getHostAddress(),
                 this.configuration.getReceiverPort(), this.configuration.getTransmitterAddress()

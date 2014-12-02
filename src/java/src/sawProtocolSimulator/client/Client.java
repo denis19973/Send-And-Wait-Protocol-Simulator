@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import sawProtocolSimulator.models.ClientConfiguration;
+import sawProtocolSimulator.models.Packet;
 
 public abstract class Client
 {
@@ -32,6 +33,15 @@ public abstract class Client
      * The main runner..where all the client running occurs (either sending or receiving).
      */
     public abstract void run();
+
+    /**
+     * Creates a packet from the configuration, sequence number, packet type and other details.
+     * 
+     * @param packetType the type of packet to make
+     * 
+     * @return a Packet
+     */
+    protected abstract Packet makePacket(int packetType);
 
     /**
      * Scan some configuration from the user.
