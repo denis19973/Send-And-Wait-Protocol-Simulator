@@ -2,6 +2,8 @@ package sawProtocolSimulator.client;
 
 public class Receiver extends Client
 {
+    
+    private int sequenceNumber;
 
     /**
      * Create a client whose sole purpose is to receive from the sender (transmitter).
@@ -11,6 +13,7 @@ public class Receiver extends Client
     public Receiver(ClientMode clientMode)
     {
         super(clientMode);
+        this.sequenceNumber = 0;
     }
 
     @Override
