@@ -1,8 +1,6 @@
 package sawProtocolSimulator.client;
 
 import java.io.IOException;
-import java.net.DatagramSocket;
-import java.net.SocketException;
 import java.util.ArrayList;
 
 import sawProtocolSimulator.models.Packet;
