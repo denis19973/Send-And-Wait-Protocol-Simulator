@@ -43,11 +43,6 @@ public class Sender extends Client
     private boolean           waitingForAcks;
 
     /**
-     * The UDP socket, the sender is listening on.
-     */
-    private DatagramSocket    listen;
-
-    /**
      * Create a client, whose sole purpose is to send (transmit) to the receiver.
      * 
      * @param clientMode the client mode.
@@ -58,22 +53,14 @@ public class Sender extends Client
         this.sequenceNumber = 1;
         this.packetWindow = new ArrayList<Packet>();
         this.timer = new Timer();
-
-        try
-        {
-            this.listen = UDPNetwork.createServer(Sender.this.configuration.getTransmitterPort());
-        }
-        catch (SocketException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
     }
 
     @Override
     public void run()
     {
+        //initialize udp server
+        this.initializeUdpServer(this.configuration.getTransmitterPort());
+        
         // take control of the channel
         this.sendTakeControlPacket();
 

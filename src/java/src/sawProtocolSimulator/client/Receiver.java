@@ -24,11 +24,6 @@ public class Receiver extends Client
     private ArrayList<Packet> ackedPackets;
 
     /**
-     * The UDP socket, the receiver is listening on.
-     */
-    private DatagramSocket    listen;
-
-    /**
      * Create a client whose sole purpose is to receive from the sender (transmitter).
      * 
      * @param clientMode the client mode.
@@ -37,21 +32,14 @@ public class Receiver extends Client
     {
         super(clientMode);
         this.currentSequenceNumber = 0;
-
-        try
-        {
-            this.listen = UDPNetwork.createServer(this.configuration.getReceiverPort());
-        }
-        catch (SocketException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void run()
     {
+        //initialize udp server
+        this.initializeUdpServer(this.configuration.getReceiverPort());
+        
         // listen for SOT
         this.waitForOtherSideToTakeControl();
 
@@ -68,7 +56,7 @@ public class Receiver extends Client
             try
             {
                 // scan each packet
-                Packet packet = UDPNetwork.getPacket(listen);
+                Packet packet = UDPNetwork.getPacket(this.listen);
 
                 switch (packet.getPacketType())
                 {

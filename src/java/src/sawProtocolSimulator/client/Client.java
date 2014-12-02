@@ -24,6 +24,11 @@ public abstract class Client
     protected ClientConfiguration configuration;
 
     /**
+     * The UDP socket, the receiver is listening on.
+     */
+    protected DatagramSocket        listen;
+
+    /**
      * Constructor. Initializes the client in a mode.
      * 
      * @param clientMode the client mode.
@@ -148,7 +153,23 @@ public abstract class Client
                 receiverAddress, receiverPort, maxPacketsToSend, windowSize, maxTimeout);
 
     }
-    
+
+    /**
+     * Initialize the Udp Server for listening.
+     */
+    protected void initializeUdpServer(int port)
+    {
+        try
+        {
+            this.listen = UDPNetwork.createServer(port);
+        }
+        catch (SocketException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Send a packet to the network emulator.
      * 
