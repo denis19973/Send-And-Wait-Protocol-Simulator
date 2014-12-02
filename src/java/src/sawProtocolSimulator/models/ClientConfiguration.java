@@ -8,18 +8,38 @@ public class ClientConfiguration
      * Address of the network emulator.
      */
     private InetAddress networkAddress;
-    
+
     /**
      * Port number, the network emulator is listening on.
      */
-    private int networkPort;
-    
+    private int         networkPort;
+
+    /**
+     * Address of the transmitter (sender).
+     */
+    private InetAddress transmitterAddress;
+
+    /**
+     * Port number of the transmitter (sender).
+     */
+    private int         transmitterPort;
+
+    /**
+     * Address of the receiver.
+     */
+    private InetAddress receiverAddress;
+
+    /**
+     * Port number of the receiver.
+     */
+    private int         receiverPort;
+
     /**
      * Default constructor.
      */
     public ClientConfiguration()
     {}
-    
+
     /**
      * Creates a Client Configuration Object.
      * 
@@ -71,6 +91,6 @@ public class ClientConfiguration
     {
         this.networkPort = networkPort;
     }
-    
-    
+
+
 }
