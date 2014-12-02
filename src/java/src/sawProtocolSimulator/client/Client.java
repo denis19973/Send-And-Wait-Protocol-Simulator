@@ -79,6 +79,7 @@ public abstract class Client
         System.out.print("\nEnter port here:\t");
 
         int networkPort = scan.nextInt();
+        scan.nextLine(); //consume left-over newline
 
         // ######################################################### //
 
@@ -97,6 +98,7 @@ public abstract class Client
         System.out.print("\nEnter port here:\t");
 
         int transmitterPort = scan.nextInt();
+        scan.nextLine(); //consume left-over newline
 
         // ######################################################### //
 
@@ -115,6 +117,7 @@ public abstract class Client
         System.out.print("\nEnter port here:\t");
 
         int receiverPort = scan.nextInt();
+        scan.nextLine(); //consume left-over newline
 
         // ######################################################### //
 
@@ -125,6 +128,7 @@ public abstract class Client
         System.out.print("\nEnter window size here:\t");
 
         int windowSize = scan.nextInt();
+        scan.nextLine(); //consume left-over newline
 
         // ######################################################### //
 
@@ -135,6 +139,7 @@ public abstract class Client
         System.out.print("\nEnter maximum number of packets here:\t");
 
         int maxPacketsToSend = scan.nextInt();
+        scan.nextLine(); //consume left-over newline
 
         // ######################################################### //
 
@@ -145,6 +150,7 @@ public abstract class Client
         System.out.print("\nEnter max timeout here (in ms):\t");
 
         int maxTimeout = scan.nextInt();
+        scan.nextLine(); //consume left-over newline
 
         // ######################################################### //
 
