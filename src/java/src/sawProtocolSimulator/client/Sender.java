@@ -175,6 +175,8 @@ public class Sender extends Client
 
             // send the packet
             this.sendPacket(packet);
+            
+            Log.d(PacketUtilities.generateClientPacketLog(packet, true));
 
             // increment the sequence number
             this.sequenceNumber++;
@@ -246,6 +248,7 @@ public class Sender extends Client
 
                 if (packet.getPacketType() == PacketUtilities.PACKET_ACK)
                 {
+                    Log.d(PacketUtilities.generateClientPacketLog(packet, false));
                     Sender.this.removePacketFromWindow(packet.getAckNum());
                 }
             }
@@ -277,8 +280,6 @@ public class Sender extends Client
         {
             if (this.packetWindow.get(i).getAckNum() == ackNum)
             {
-                Log.d(PacketUtilities.generateClientPacketLog(packetWindow.get(i), false));
-
                 this.packetWindow.remove(i);
             }
         }
