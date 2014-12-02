@@ -1,4 +1,4 @@
-package sawProtocolSimulator.network;
+package sawProtocolSimulator.networkEmulator;
 
 import java.util.Scanner;
 

@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import sawProtocolSimulator.exceptions.CouldNotReadConfigurationException;
 import sawProtocolSimulator.models.NetworkConfiguration;
-import sawProtocolSimulator.network.Network;
+import sawProtocolSimulator.networkEmulator.Network;
 
 public class Main
 {
