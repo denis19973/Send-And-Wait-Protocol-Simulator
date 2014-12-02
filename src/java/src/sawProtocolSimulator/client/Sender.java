@@ -82,6 +82,8 @@ public class Sender extends Client
                     // set timer and after it's over, check for ACK's.
                     this.setTimerForACKs();
                 }
+                
+                //TODO: print packet window status.
             }
             
             //windowSize number of packets have been sent
@@ -102,6 +104,18 @@ public class Sender extends Client
         Packet packet = this.makePacket(PacketUtilities.PACKET_START_OF_TRANSMISSION);
 
         // send the packet
+        this.sendPacket(packet);
+    }
+    
+    /**
+     * Send the packet to end the transmission.
+     */
+    private void sentEndOfTransmissionPacket()
+    {
+        //create an EOT packet.
+        Packet packet = this.makePacket(PacketUtilities.PACKET_END_OF_TRANSMISSION);
+        
+        //send the packet
         this.sendPacket(packet);
     }
 
