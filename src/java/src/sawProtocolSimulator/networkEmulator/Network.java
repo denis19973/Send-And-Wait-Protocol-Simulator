@@ -60,7 +60,7 @@ public class Network
                 else
                 {
                     // if packet drop rate is lower than the threshold, drop it.
-                    if (this.getDropRateThreshold() <= this.dropRate)
+                    if (this.getDropRateThreshold() <= this.configuration.getDropRate())
                     {
                         Log.d(PacketUtilities.generateNetworkPacketLog(packet, false));
                         totalPacketsDropped++;
@@ -70,7 +70,7 @@ public class Network
                         // packet drop rate is greater than the threshold, let it go through.
 
                         // delay the packet by averageDelayPerPacket
-                        Thread.sleep(this.averageDelayPerPacket);
+                        Thread.sleep(this.configuration.getAverageDelayPerPacket());
 
                         UDPNetwork.sendPacket(socket, packet);
 
@@ -138,7 +138,7 @@ public class Network
 
         if(scan.hasNextInt())
         {
-            this.dropRate = scan.nextInt();
+//            this.dropRate = scan.nextInt();
         }
 
         System.out.println("\n\n");
@@ -151,7 +151,7 @@ public class Network
 
         if(scan.hasNextInt())
         {
-            this.averageDelayPerPacket = scan.nextInt();
+//            this.averageDelayPerPacket = scan.nextInt();
         }
         
         scan.close();
@@ -163,8 +163,8 @@ public class Network
     public void printConfiguration()
     {
         System.out.println("\n\n");
-        System.out.println("Drop Rate (between 1 and 100): " + this.dropRate);
-        System.out.println("Average Delay Per Packet (in ms): " + this.averageDelayPerPacket);
+        System.out.println("Drop Rate (between 1 and 100): " + this.configuration.getDropRate());
+        System.out.println("Average Delay Per Packet (in ms): " + this.configuration.getAverageDelayPerPacket());
         System.out.println("Sender: " + this.configuration.getSender() + ":"
                 + this.configuration.getSenderPort());
         System.out.println("Receiver: " + this.configuration.getReceiver() + ":"
