@@ -9,6 +9,7 @@ import java.util.Scanner;
 import sawProtocolSimulator.models.NetworkConfiguration;
 import sawProtocolSimulator.models.Packet;
 import sawProtocolSimulator.network.UDPNetwork;
+import sawProtocolSimulator.utilities.Log;
 import sawProtocolSimulator.utilities.PacketUtilities;
 
 public class Network
@@ -68,14 +69,14 @@ public class Network
                 if (packet.getPacketType() == 1 || packet.getPacketType() == 4)
                 {
                     UDPNetwork.sendPacket(socket, packet);
-                    System.out.println(PacketUtilities.generateNetworkPacketLog(packet, true));
+                    Log.d(PacketUtilities.generateNetworkPacketLog(packet, true));
                 }
                 else
                 {
                     // if packet drop rate is lower than the threshold, drop it.
                     if (this.getDropRateThreshold() <= this.dropRate)
                     {
-                        System.out.println(PacketUtilities.generateNetworkPacketLog(packet, false));
+                        Log.d(PacketUtilities.generateNetworkPacketLog(packet, false));
                     }
                     else
                     {
@@ -86,27 +87,30 @@ public class Network
 
                         UDPNetwork.sendPacket(socket, packet);
 
-                        System.out.println(PacketUtilities.generateNetworkPacketLog(packet, true));
+                        Log.d(PacketUtilities.generateNetworkPacketLog(packet, true));
                     }
                 }
+                
+                Log.d("[NETWORK] Total packets:           " + totalPackets);
+                Log.d("[NETWORK] Total packets dropped:   " + totalPacketsDropped);
+                Log.d("[NETWORK] Total packets forwarded: " + totalPacketsForwarded);
             }
             catch (SocketException e)
             {
-                // socket wasn't created, log and crash the program.
+                Log.d(e.getMessage());
+                System.exit(0); //fatal
             }
             catch (ClassNotFoundException e)
             {
-                // class wasn't read while reading from the UDP network. Ignore and move (natural
-                // noise).
+                Log.d(e.getMessage());
             }
             catch (IOException e)
             {
-                // couldn't read from the socket.
+                Log.d(e.getMessage());
             }
             catch (InterruptedException e)
             {
-                // TODO Auto-generated catch block - for thread.
-                e.printStackTrace();
+                Log.d(e.getMessage());
             }
         }
     }
