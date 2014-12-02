@@ -27,11 +27,11 @@ public class Network
     private int                  dropRate;
 
     /**
-     * The average delay per packet.
+     * The average delay per packet (in milliseconds).
      * 
-     * In seconds: example: 0.05 seconds.
+     * In seconds: example: 5 ms.
      */
-    private double               averageDelayPerPacket;
+    private int                  averageDelayPerPacket;
 
     /**
      * Construct the network module.
@@ -52,43 +52,50 @@ public class Network
         {
             DatagramSocket socket = UDPNetwork.createServer(9000);
             Packet packet = UDPNetwork.getPacket(socket);
-            
-            //if it's a control packet, let it go through.
-            if(packet.getPacketType() == 1 || packet.getPacketType() == 4)
+
+            // if it's a control packet, let it go through.
+            if (packet.getPacketType() == 1 || packet.getPacketType() == 4)
             {
                 UDPNetwork.sendPacket(socket, packet);
                 System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
             }
             else
             {
-                //if packet drop rate is lower than the threshold, drop it.
-                if(this.getDropRateThreshold() <= this.dropRate)
+                // if packet drop rate is lower than the threshold, drop it.
+                if (this.getDropRateThreshold() <= this.dropRate)
                 {
                     System.out.println(PacketUtilities.generatePacketLog(packet, true, false));
                 }
                 else
                 {
-                    //packet drop rate is greater than the threshold, let it go through.
-                    
-                    //delay the packet by averageDelayPerPacket
-                    
+                    // packet drop rate is greater than the threshold, let it go through.
+
+                    // delay the packet by averageDelayPerPacket
+                    Thread.sleep(this.averageDelayPerPacket);
+
                     UDPNetwork.sendPacket(socket, packet);
-                    
+
                     System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
                 }
             }
         }
         catch (SocketException e)
         {
-            //socket wasn't created, log and crash the program.
+            // socket wasn't created, log and crash the program.
         }
         catch (ClassNotFoundException e)
         {
-            //class wasn't read while reading from the UDP network. Ignore and move (natural noise).
+            // class wasn't read while reading from the UDP network. Ignore and move (natural
+            // noise).
         }
         catch (IOException e)
         {
-            //couldn't read from the socket.
+            // couldn't read from the socket.
+        }
+        catch (InterruptedException e)
+        {
+            // TODO Auto-generated catch block - for thread.
+            e.printStackTrace();
         }
     }
 
@@ -134,7 +141,7 @@ public class Network
                 + "be delayed by the time interval specified here."
                 + "\nExample delay: 0.01 seconds");
         System.out.print("\nEnter Average Delay Per Packet (in ms):\t");
-        this.averageDelayPerPacket = scan.nextDouble();
+        this.averageDelayPerPacket = scan.nextInt();
     }
 
     /**
