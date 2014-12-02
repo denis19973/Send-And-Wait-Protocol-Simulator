@@ -35,6 +35,16 @@ public class ClientConfiguration
     private int         receiverPort;
 
     /**
+     * The maximum number of packets that we're going to send.
+     */
+    private int         maxPacketsToSend;
+
+    /**
+     * The size of our window.
+     */
+    private int         windowSize;
+
+    /**
      * Default constructor.
      */
     public ClientConfiguration()
@@ -49,10 +59,12 @@ public class ClientConfiguration
      * @param transmitterPort the port number of the transmitter (sender)
      * @param receiverAddress the address of the receiver
      * @param receiverPort the port number of the receiver
+     * @param maxPacketsToSend the maximum number of packets that we're going to send
+     * @param windowSize the size of our window.
      */
     public ClientConfiguration(InetAddress networkAddress, int networkPort,
             InetAddress transmitterAddress, int transmitterPort, InetAddress receiverAddress,
-            int receiverPort)
+            int receiverPort, int maxPacketsToSend, int windowSize)
     {
         this.networkAddress = networkAddress;
         this.networkPort = networkPort;
@@ -60,9 +72,9 @@ public class ClientConfiguration
         this.transmitterPort = transmitterPort;
         this.receiverAddress = receiverAddress;
         this.receiverPort = receiverPort;
+        this.maxPacketsToSend = maxPacketsToSend;
+        this.windowSize = windowSize;
     }
-
-
 
     /**
      * Get the Address of the network emulator.
@@ -182,6 +194,46 @@ public class ClientConfiguration
     public void setReceiverPort(int receiverPort)
     {
         this.receiverPort = receiverPort;
+    }
+
+    /**
+     * Get the maximum number of packets to send.
+     * 
+     * @return the maxPacketsToSend
+     */
+    public int getMaxPacketsToSend()
+    {
+        return maxPacketsToSend;
+    }
+
+    /**
+     * Set the maximum number of packets to send.
+     * 
+     * @param maxPacketsToSend the maxPacketsToSend to set
+     */
+    public void setMaxPacketsToSend(int maxPacketsToSend)
+    {
+        this.maxPacketsToSend = maxPacketsToSend;
+    }
+
+    /**
+     * Get the window size.
+     * 
+     * @return the windowSize
+     */
+    public int getWindowSize()
+    {
+        return windowSize;
+    }
+
+    /**
+     * Set the window size.
+     * 
+     * @param windowSize the windowSize to set
+     */
+    public void setWindowSize(int windowSize)
+    {
+        this.windowSize = windowSize;
     }
 
 }
