@@ -16,7 +16,15 @@ public class Receiver extends Client
     @Override
     public void run()
     {
-
+        //listen for SOT
+        
+        //scan each packet
+        
+        //send an ack for each packet
+        
+        //if a packet arrives again, send ack again
+        
+        //listen for EOT
     }
 
 }
