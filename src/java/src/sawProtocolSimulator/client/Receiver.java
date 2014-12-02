@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import sawProtocolSimulator.models.Packet;
 import sawProtocolSimulator.network.UDPNetwork;
+import sawProtocolSimulator.utilities.Log;
 import sawProtocolSimulator.utilities.PacketUtilities;
 
 public class Receiver extends Client
@@ -35,9 +36,9 @@ public class Receiver extends Client
     @Override
     public void run()
     {
-        //initialize udp server
+        // initialize udp server
         this.initializeUdpServer(this.configuration.getReceiverPort());
-        
+
         // listen for SOT
         this.waitForOtherSideToTakeControl();
 
@@ -60,7 +61,10 @@ public class Receiver extends Client
                 {
                     case (PacketUtilities.PACKET_END_OF_TRANSMISSION):
                         // listen for EOT
-                        // TODO: print EOT .. session stats and end.
+
+                        Log.d(PacketUtilities.generateClientPacketLog(packet, false));
+                        Log.d("[RECEIVER] Total Packets Received: " + totalPackets);
+                        Log.d("[RECEIVER] Total Duplicate ACK's:  " + totalDuplicateAcks);
 
                         keepReceiving = false;
 
@@ -68,52 +72,41 @@ public class Receiver extends Client
 
                     case (PacketUtilities.PACKET_DATA):
 
+                        // update current sequence number
+                        this.currentSequenceNumber = packet.getSeqNum();
+
+                        // craft and send ACK packet
+                        Packet ackPacket = this.makePacket(PacketUtilities.PACKET_ACK);
+                        this.sendPacket(ackPacket);
+
+                        // add to list of ack'ed packets
+                        this.ackedPackets.add(packet);
+
                         // if packet hasn't been ACK'ed before.
                         if (!this.findIfPacketAckedBefore(packet.getSeqNum()))
                         {
                             totalPackets++;
+                            Log.d(PacketUtilities.generateClientPacketLog(packet, false));
+                            Log.d(PacketUtilities.generateClientPacketLog(ackPacket, true));
                         }
                         else
                         {
                             // ACKing again - earlier ACK probably got lost
                             totalDuplicateAcks++;
+                            Log.d(PacketUtilities.generateClientResendLog(packet, false));
                         }
-
-                        // update current sequence number
-                        this.currentSequenceNumber = packet.getSeqNum();
-
-                        // TODO: print data
-
-                        // craft and send ACK packet
-                        this.sendPacket(this.makePacket(PacketUtilities.PACKET_ACK));
-
-                        // add to list of ack'ed packets
-                        this.ackedPackets.add(packet);
-
-                        // TODO: print ACK packet
-
-                        break;
-
-                    default:
-                        // TODO: packet type not valid - do something
 
                         break;
                 }
 
-                // send an ack for each packet
-
-                // if a packet arrives again, send ack again
-
             }
             catch (ClassNotFoundException e)
             {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                Log.d(e.getMessage());
             }
             catch (IOException e)
             {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                Log.d(e.getMessage());
             }
         }
     }
@@ -149,14 +142,14 @@ public class Receiver extends Client
 
             if (sotPacket.getPacketType() == PacketUtilities.PACKET_START_OF_TRANSMISSION)
             {
-                // TODO: print SOT packet.
+                Log.d(PacketUtilities.generateClientPacketLog(sotPacket, false));
 
                 // send SOT back to signify receive.
                 this.sendPacket(this.makePacket(PacketUtilities.PACKET_START_OF_TRANSMISSION));
             }
             else
             {
-                // TODO: exception..close receiver.
+                Log.d(PacketUtilities.generateClientPacketLog(sotPacket, false));
 
                 // malicious packet - continue.
                 this.waitForOtherSideToTakeControl();
@@ -164,13 +157,11 @@ public class Receiver extends Client
         }
         catch (ClassNotFoundException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.d(e.getMessage());
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.d(e.getMessage());
         }
     }
 
