@@ -49,16 +49,16 @@ public class Network
      */
     public void run()
     {
-        //run switch for the loop
+        // run switch for the loop
         boolean runNetwork = true;
-        
-        //stats
+
+        // stats
         int totalPackets = 0;
         int totalPacketsDropped = 0;
         int totalPacketsForwarded = 0;
-        
-        //run forever - basically
-        while(runNetwork)
+
+        // run forever - basically
+        while (runNetwork)
         {
             try
             {
@@ -70,6 +70,7 @@ public class Network
                 {
                     UDPNetwork.sendPacket(socket, packet);
                     Log.d(PacketUtilities.generateNetworkPacketLog(packet, true));
+                    totalPackets++;
                 }
                 else
                 {
@@ -77,6 +78,7 @@ public class Network
                     if (this.getDropRateThreshold() <= this.dropRate)
                     {
                         Log.d(PacketUtilities.generateNetworkPacketLog(packet, false));
+                        totalPacketsDropped++;
                     }
                     else
                     {
@@ -88,9 +90,10 @@ public class Network
                         UDPNetwork.sendPacket(socket, packet);
 
                         Log.d(PacketUtilities.generateNetworkPacketLog(packet, true));
+                        totalPacketsForwarded++;
                     }
                 }
-                
+
                 Log.d("[NETWORK] Total packets:           " + totalPackets);
                 Log.d("[NETWORK] Total packets dropped:   " + totalPacketsDropped);
                 Log.d("[NETWORK] Total packets forwarded: " + totalPacketsForwarded);
@@ -98,7 +101,7 @@ public class Network
             catch (SocketException e)
             {
                 Log.d(e.getMessage());
-                System.exit(0); //fatal
+                System.exit(0); // fatal
             }
             catch (ClassNotFoundException e)
             {
@@ -158,6 +161,8 @@ public class Network
                 + "\nExample delay: 0.01 seconds");
         System.out.print("\nEnter Average Delay Per Packet (in ms):\t");
         this.averageDelayPerPacket = scan.nextInt();
+        
+        scan.close();
     }
 
     /**
