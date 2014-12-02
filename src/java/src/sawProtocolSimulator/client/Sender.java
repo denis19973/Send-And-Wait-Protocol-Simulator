@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import sawProtocolSimulator.models.Packet;
 import sawProtocolSimulator.network.UDPNetwork;
+import sawProtocolSimulator.utilities.Log;
 import sawProtocolSimulator.utilities.PacketUtilities;
 
 public class Sender extends Client
@@ -58,9 +59,9 @@ public class Sender extends Client
     @Override
     public void run()
     {
-        //initialize udp server
+        // initialize udp server
         this.initializeUdpServer(this.configuration.getTransmitterPort());
-        
+
         // take control of the channel
         this.sendTakeControlPacket();
 
@@ -87,12 +88,16 @@ public class Sender extends Client
                     this.setTimerForACKs();
                 }
 
-                // TODO: print packet window status.
+                Log.d("Window Status: " + packetWindow.size()
+                        + " packets left in the current window!");
             }
 
-            // windowSize number of packets have been sent
+            // windowSize number of more packets have been sent
             packetsSent += this.configuration.getWindowSize();
-            // TODO: print packets sent so far
+
+            Log.d("[SENDER] Sent Packets:      " + packetsSent);
+            Log.d("[SENDER] Remaining Packets: "
+                    + (this.configuration.getMaxPacketsToSend() - packetsSent));
         }
 
         // when all window packets sent, send EOT
@@ -109,6 +114,8 @@ public class Sender extends Client
 
         // send the packet
         this.sendPacket(packet);
+
+        Log.d(PacketUtilities.generateClientPacketLog(packet, true));
     }
 
     /**
@@ -122,7 +129,7 @@ public class Sender extends Client
         // send the packet
         this.sendPacket(packet);
 
-        // TODO: print packet
+        Log.d(PacketUtilities.generateClientPacketLog(packet, true));
 
         // wait for SOT packet from receiver
         try
@@ -131,28 +138,23 @@ public class Sender extends Client
 
             if (receiverResponse.getPacketType() == PacketUtilities.PACKET_START_OF_TRANSMISSION)
             {
-                // TODO: print SOT
-
-                // TODO: start transaction.
+                Log.d(PacketUtilities.generateClientPacketLog(packet, false));
             }
 
             // wait for 2 seconds before sending data packets.
             Thread.sleep(2000);
         }
-        catch (ClassNotFoundException e1)
+        catch (ClassNotFoundException e)
         {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            Log.d(e.getMessage());
         }
-        catch (IOException e1)
+        catch (IOException e)
         {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            Log.d(e.getMessage());
         }
         catch (InterruptedException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.d(e.getMessage());
         }
     }
 
@@ -163,7 +165,6 @@ public class Sender extends Client
                 this.configuration.getReceiverPort(), this.configuration.getTransmitterAddress()
                         .getHostAddress(), this.configuration.getTransmitterPort(), packetType,
                 this.sequenceNumber, this.sequenceNumber, this.configuration.getWindowSize());
-
     }
 
     /**
@@ -247,10 +248,12 @@ public class Sender extends Client
                     // can block for a maximum of 2 seconds
                     Sender.this.listen.setSoTimeout(2000);
 
-                    // scan while packet window size isn't 0. If 0, all packets have been acked.
-                    // scan while the thread hasn't been interrupted
+                    /**
+                     * Scan while packet window size isn't 0. If 0, all packets have been ACK'ed. 
+                     * AND Scan while the thread hasn't been interrupted.
+                     */
                     while (Sender.this.packetWindow.size() != 0
-                            || !Thread.currentThread().isInterrupted())
+                            && !Thread.currentThread().isInterrupted())
                     {
                         Packet packet = UDPNetwork.getPacket(Sender.this.listen);
 
