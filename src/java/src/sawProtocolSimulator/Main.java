@@ -16,6 +16,7 @@ import sawProtocolSimulator.exceptions.CouldNotReadConfigurationException;
 import sawProtocolSimulator.models.ClientConfiguration;
 import sawProtocolSimulator.models.NetworkConfiguration;
 import sawProtocolSimulator.networkEmulator.Network;
+import sawProtocolSimulator.utilities.Log;
 
 public class Main
 {
@@ -51,7 +52,7 @@ public class Main
                 }
                 catch (CouldNotReadConfigurationException e)
                 {
-                    // TODO: LOG
+                    Log.d(e.getMessage());
 
                     // critical thing failed, close the program.
                     System.exit(0);
@@ -75,7 +76,7 @@ public class Main
                 }
                 catch (CouldNotReadConfigurationException e)
                 {
-                    // TODO: LOG
+                    Log.d(e.getMessage());
 
                     // critical thing failed, close the program.
                     System.exit(0);
@@ -94,9 +95,8 @@ public class Main
 
                 break;
             default:
-                System.out.println("You didn't enter a valid option. Now exiting!");
+                Log.d("You didn't enter a valid mode option. Now exiting!");
 
-                // LOG
                 System.exit(0);
         }
 
@@ -122,7 +122,7 @@ public class Main
         }
         catch (CouldNotReadConfigurationException e)
         {
-            // TODO: LOG
+            Log.d(e.getMessage());
 
             // critical thing failed, close the program.
             System.exit(0);
@@ -171,18 +171,15 @@ public class Main
         }
         catch (FileNotFoundException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new CouldNotReadConfigurationException("Couldn't read the configuration file.");
         }
         catch (UnknownHostException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new CouldNotReadConfigurationException(e.getMessage());
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new CouldNotReadConfigurationException("Couldn't load the configuration file.");
         }
         finally
         {
@@ -194,8 +191,6 @@ public class Main
                 }
                 catch (IOException e)
                 {
-                    e.printStackTrace();
-
                     throw new CouldNotReadConfigurationException(
                             "Couldn't close the configuration file.");
                 }
@@ -239,22 +234,14 @@ public class Main
         }
         catch (FileNotFoundException e)
         {
-            e.printStackTrace();
-
             throw new CouldNotReadConfigurationException("Couldn't read the configuration file.");
         }
         catch (UnknownHostException e)
         {
-            e.printStackTrace();
-            e.getCause(); // this is the cause
-            e.getMessage(); // this is the message
-
-            // network module isn't reachable. throw this.
+            throw new CouldNotReadConfigurationException(e.getMessage());
         }
         catch (IOException e)
         {
-            e.printStackTrace();
-
             throw new CouldNotReadConfigurationException("Couldn't load the configuration file.");
         }
         finally
