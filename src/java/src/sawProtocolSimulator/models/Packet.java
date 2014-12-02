@@ -140,4 +140,14 @@ public class Packet implements Serializable
         this.data = data;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return "Packet [packetType=" + packetType + ", seqNum=" + seqNum + ", windowSize="
+                + windowSize + ", ackNum=" + ackNum + ", data=" + data + "]";
+    }
+
 }
