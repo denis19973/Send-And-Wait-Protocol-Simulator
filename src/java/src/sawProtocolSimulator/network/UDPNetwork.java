@@ -109,7 +109,6 @@ public class UDPNetwork
                 new DatagramPacket(dataBytes, dataBytes.length, destinationAddress, destinationPort);
 
         socket.send(datagramPacket);
-        socket.close();
 
     }
 
