@@ -111,10 +111,10 @@ public abstract class Client
 
         // ######################################################### //
 
-        System.out.println("Maximum Timeout Duration");
+        System.out.println("Maximum Timeout Duration (in milliseconds)");
         System.out.println("===================================");
         System.out.println("The maximum timeout duration until a packet can remain unACKed.");
-        System.out.print("\nEnter max timeout here:\t");
+        System.out.print("\nEnter max timeout here (in ms):\t");
 
         int maxTimeout = scan.nextInt();
 
@@ -153,7 +153,7 @@ public abstract class Client
             this.configuration.setReceiverPort(receiverPort);
             this.configuration.setMaxPacketsToSend(maxPacketsToSend);
             this.configuration.setWindowSize(windowSize);
-
+            this.configuration.setMaxTimeout(maxTimeout);
         }
         catch (UnknownHostException e)
         {
