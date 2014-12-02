@@ -52,6 +52,10 @@ public class PacketUtilities
                 break;
         }
 
+        packet.setDestinationAddress(destinationAddress);
+        packet.setDestinationPort(destinationPort);
+        packet.setSourceAddress(sourceAddress);
+        packet.setSourcePort(sourcePort);
         packet.setPacketType(packetType);
         packet.setAckNum(acknowledgementNumber);
         packet.setSeqNum(sequenceNumber);
