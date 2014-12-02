@@ -58,6 +58,7 @@ public abstract class Client
 
         // ######################################################### //
 
+        System.out.println("\n");
         System.out.println("Network Emulator Address");
         System.out.println("===================================");
         System.out
@@ -66,6 +67,7 @@ public abstract class Client
 
         String networkAddress = scan.nextLine();
 
+        System.out.println("\n");
         System.out.println("Network Emulator Port");
         System.out.println("===================================");
         System.out.println("The port of the machine which is acting as the network emulator.");
@@ -75,6 +77,7 @@ public abstract class Client
 
         // ######################################################### //
 
+        System.out.println("\n");
         System.out.println("Transmitter Address");
         System.out.println("===================================");
         System.out.println("The IP Address of the machine which is acting as the transmitter.");
@@ -82,6 +85,7 @@ public abstract class Client
 
         String transmitterAddress = scan.nextLine();
 
+        System.out.println("\n");
         System.out.println("Transmitter Port");
         System.out.println("===================================");
         System.out.println("The port of the machine which is acting as the transmitter.");
@@ -91,6 +95,7 @@ public abstract class Client
 
         // ######################################################### //
 
+        System.out.println("\n");
         System.out.println("Receiver Address");
         System.out.println("===================================");
         System.out.println("The IP Address of the machine which is acting as the receiver.");
@@ -98,6 +103,7 @@ public abstract class Client
 
         String receiverAddress = scan.nextLine();
 
+        System.out.println("\n");
         System.out.println("Receiver Port");
         System.out.println("===================================");
         System.out.println("The port of the machine which is acting as the receiver.");
@@ -107,6 +113,7 @@ public abstract class Client
 
         // ######################################################### //
 
+        System.out.println("\n");
         System.out.println("Window Size");
         System.out.println("===================================");
         System.out.println("The size of our window!");
@@ -116,6 +123,7 @@ public abstract class Client
 
         // ######################################################### //
 
+        System.out.println("\n");
         System.out.println("Max Packets to Send");
         System.out.println("===================================");
         System.out.println("The maximum number of packets that will be sent!");
@@ -125,6 +133,7 @@ public abstract class Client
 
         // ######################################################### //
 
+        System.out.println("\n");
         System.out.println("Maximum Timeout Duration (in milliseconds)");
         System.out.println("===================================");
         System.out.println("The maximum timeout duration until a packet can remain unACKed.");

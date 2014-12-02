@@ -116,6 +116,7 @@ public class Network
      */
     public void takeInput()
     {
+        System.out.println("\n\n");
         System.out.println("Packet Drop Rate (1 and 100)");
         System.out.println("=================================");
         System.out.println("A random number between 1 and 100 will be generated for "
@@ -126,12 +127,13 @@ public class Network
         Scanner scan = new Scanner(System.in);
         this.dropRate = scan.nextInt();
 
-        System.out.println("Average Delay");
+        System.out.println("\n\n");
+        System.out.println("Average Delay (in milliseconds)");
         System.out.println("=================================");
         System.out.println("This is the average delay per packet. Each packet will "
                 + "be delayed by the time interval specified here."
                 + "\nExample delay: 0.01 seconds");
-        System.out.print("\nEnter Average Delay Per Packet (in seconds):\t");
+        System.out.print("\nEnter Average Delay Per Packet (in ms):\t");
         this.averageDelayPerPacket = scan.nextDouble();
     }
 
