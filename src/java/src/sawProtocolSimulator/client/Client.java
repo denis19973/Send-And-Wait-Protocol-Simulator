@@ -111,12 +111,21 @@ public abstract class Client
 
         // ######################################################### //
 
+        System.out.println("Maximum Timeout Duration");
+        System.out.println("===================================");
+        System.out.println("The maximum timeout duration until a packet can remain unACKed.");
+        System.out.print("\nEnter max timeout here:\t");
+
+        int maxTimeout = scan.nextInt();
+
+        // ######################################################### //
+
         // set all configuration
         setConfiguration(networkAddress, networkPort, transmitterAddress, transmitterPort,
-                receiverAddress, receiverPort, maxPacketsToSend, windowSize);
+                receiverAddress, receiverPort, maxPacketsToSend, windowSize, maxTimeout);
 
     }
-    
+
     /**
      * Sets the client configuration object with the scanned details.
      * 
@@ -128,10 +137,11 @@ public abstract class Client
      * @param receiverPort port number of the receiver
      * @param maxPacketsToSend max packets that will be sent
      * @param windowSize the window size
+     * @param maxTimeout the maximum timeout duration until a packet can remain unACKed.
      */
     private void setConfiguration(String networkAddress, int networkPort,
             String transmitterAddress, int transmitterPort, String receiverAddress,
-            int receiverPort, int maxPacketsToSend, int windowSize)
+            int receiverPort, int maxPacketsToSend, int windowSize, int maxTimeout)
     {
         try
         {
