@@ -11,7 +11,6 @@ import sawProtocolSimulator.models.ClientConfiguration;
 import sawProtocolSimulator.models.Packet;
 import sawProtocolSimulator.network.UDPNetwork;
 import sawProtocolSimulator.utilities.Log;
-import sawProtocolSimulator.utilities.PacketUtilities;
 
 public abstract class Client
 {
