@@ -67,7 +67,7 @@ public class Main
         //If network module, read the network configuration and create the object.
         try
         {
-            NetworkConfiguration configuration = networkConfiguration();
+            NetworkConfiguration configuration = loadNetworkConfiguration();
             Network networkModule = new Network(configuration);
             
             networkModule.takeInput();
@@ -90,7 +90,7 @@ public class Main
      * @return Configuration the configuration parsed from the config file; null if nothing read.
      * @throws CouldNotReadConfigurationException if the file cannot be parsed.
      */
-    public static NetworkConfiguration networkConfiguration() throws CouldNotReadConfigurationException
+    public static NetworkConfiguration loadNetworkConfiguration() throws CouldNotReadConfigurationException
     {
         Properties networkProperties = new Properties();
         InputStream fileInputStream = null;
