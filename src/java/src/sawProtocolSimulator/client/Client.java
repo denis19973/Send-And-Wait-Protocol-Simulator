@@ -10,6 +10,8 @@ import java.util.Scanner;
 import sawProtocolSimulator.models.ClientConfiguration;
 import sawProtocolSimulator.models.Packet;
 import sawProtocolSimulator.network.UDPNetwork;
+import sawProtocolSimulator.utilities.Log;
+import sawProtocolSimulator.utilities.PacketUtilities;
 
 public abstract class Client
 {
@@ -157,7 +159,7 @@ public abstract class Client
         // set all configuration
         setConfiguration(networkAddress, networkPort, transmitterAddress, transmitterPort,
                 receiverAddress, receiverPort, maxPacketsToSend, windowSize, maxTimeout);
-        
+
         scan.close();
 
     }
@@ -173,8 +175,9 @@ public abstract class Client
         }
         catch (SocketException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.d(e.getMessage());
+
+            System.exit(0);
         }
     }
 
@@ -193,17 +196,18 @@ public abstract class Client
             UDPNetwork.sendPacket(socket, packet, this.configuration.getNetworkAddress(),
                     this.configuration.getNetworkPort());
 
-            // TODO: print this packet sent
+            Log.d(PacketUtilities.generateClientPacketLog(packet, true));
         }
         catch (SocketException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.d(e.getMessage());
+
+            System.exit(0);
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // socket read error.
+            Log.d(e.getMessage() + " Couldn't read from socket.");
         }
     }
 
@@ -239,7 +243,7 @@ public abstract class Client
         catch (UnknownHostException e)
         {
             // client entered a network address which wasn't valid
-            System.out.println("Couldn't find one of the hosts you entered. Please try again!");
+            Log.d("Couldn't find one of the hosts you entered. Please try again!");
 
             // get input again
             takeInput();
