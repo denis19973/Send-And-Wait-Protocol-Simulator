@@ -69,6 +69,9 @@ public class Sender extends Client
 
             // we are now waiting for ack's.
             this.waitingForAcks = true;
+            
+            // set timer and after it's over, check for ACK's.
+            this.setTimerForACKs();
 
             // wait for ack's for each packet
             while (!this.packetWindow.isEmpty())
@@ -219,6 +222,7 @@ public class Sender extends Client
             public void run()
             {
                 // call ackTimeout and check which packets have been ACK'ed.
+                System.out.println("timeout");
                 Sender.this.ackTimeout();
             }
 
