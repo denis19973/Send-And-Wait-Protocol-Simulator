@@ -46,7 +46,6 @@ public class Sender extends Client
         super(clientMode);
         this.sequenceNumber = 1;
         this.packetWindow = new ArrayList<Packet>();
-        this.timer = new Timer();
     }
 
     @Override
@@ -216,6 +215,8 @@ public class Sender extends Client
      */
     private void setTimerForACKs()
     {
+        this.timer = new Timer();
+        
         this.timer.schedule(new TimerTask() {
 
             @Override
@@ -295,6 +296,8 @@ public class Sender extends Client
     {
         this.timer.cancel();
         this.timer.purge();
+        
+        this.timer = null;
 
         // not waiting for ack's now.
         this.waitingForAcks = false;
