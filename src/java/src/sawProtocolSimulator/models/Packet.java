@@ -8,6 +8,11 @@ import java.io.Serializable;
 public class Packet implements Serializable
 {
     /**
+     * Serial Version.
+     */
+    private static final long serialVersionUID = 4530874967285330444L;
+
+    /**
      * The type of packet, can either be:
      * 
      * - 1 = SOT (when acquiring the channel - start of transmission)
