@@ -21,7 +21,7 @@ public class Network
      * The drop rate.
      * 
      * A random number between 1 and 100 will be generated for each packet received and if that
-     * random number is below or equal to this drop rate, that packet will be dropped.
+     * random number is lower than or equal to this drop rate, that packet will be dropped.
      */
     private int                  dropRate;
 
@@ -59,8 +59,15 @@ public class Network
             }
             else
             {
-                if(this.getDropRateThreshold() >= this.dropRate)
+                //if packet drop rate is lower than the threshold, drop it.
+                if(this.getDropRateThreshold() <= this.dropRate)
                 {
+                    System.out.println();
+                }
+                else
+                {
+                    //packet drop rate is greater than the threshold, let it go through.
+                    
                 }
             }
         }
@@ -80,7 +87,7 @@ public class Network
 
     /**
      * Returns a randomly calculated drop rate threshold. If the packet drop rate specified by the
-     * user is greater than or equal to this number, it is dropped.
+     * user is lower than or equal to this number, it is dropped.
      * 
      * Essentially a random number between 1 and 100, inclusive.
      * 
