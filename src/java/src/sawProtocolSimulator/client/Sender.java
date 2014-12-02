@@ -15,7 +15,7 @@ public class Sender extends Client
     /**
      * The current sequence number.
      * 
-     * Initialized to 0 in the constructor.
+     * Initialized to 1 in the constructor.
      */
     private int               sequenceNumber;
 
@@ -32,7 +32,7 @@ public class Sender extends Client
     public Sender(ClientMode clientMode)
     {
         super(clientMode);
-        this.sequenceNumber = 0;
+        this.sequenceNumber = 1;
         this.packetWindow = new ArrayList<Packet>();
     }
 
@@ -43,6 +43,7 @@ public class Sender extends Client
         this.sendTakeControlPacket();
         
         //generate packets for a window
+        this.generateWindow();
         
         //send the packets in the window
         
@@ -53,6 +54,24 @@ public class Sender extends Client
         //once, all ack's arrive, empty window, and move onto the next window
         
         //when all window packets sent, send EOT
+    }
+    
+    /**
+     * Generate packets for a full window.
+     */
+    private void generateWindow()
+    {
+        for (int i = 1; i <= this.configuration.getWindowSize(); i++)
+        {
+            //craft a data packet
+            Packet packet = this.makePacket(PacketUtilities.PACKET_DATA);
+            
+            //add it to the window
+            this.packetWindow.add(packet);
+            
+            //increment the sequence number
+            this.sequenceNumber++;
+        }
     }
 
     /**
