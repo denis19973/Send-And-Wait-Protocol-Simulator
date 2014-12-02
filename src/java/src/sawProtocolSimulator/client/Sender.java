@@ -61,26 +61,36 @@ public class Sender extends Client
         // take control of the channel
         this.sendTakeControlPacket();
 
-        // generate packets for a window and send
-        this.generateWindowAndSend();
-
-        // we are now waiting for ack's.
-        this.waitingForAcks = true;
-
-        // wait for ack's for each packet
-        while (!this.packetWindow.isEmpty())
+        //total packets sent so far
+        int packetsSent = 0;
+        
+        // once, all ack's arrive, empty window, and move onto the next window
+        while (packetsSent < this.configuration.getMaxPacketsToSend())
         {
-            // set a timer only if we are not already waiting..no point invoking it again and again
-            if (!this.waitingForAcks)
+            // generate packets for a window and send
+            this.generateWindowAndSend();
+
+            // we are now waiting for ack's.
+            this.waitingForAcks = true;
+
+            // wait for ack's for each packet
+            while (!this.packetWindow.isEmpty())
             {
-                // set timer and after it's over, check for ACK's.
-                this.setTimerForACKs();
+                // set a timer only if we are not already waiting..no point invoking it again and again
+                if (!this.waitingForAcks)
+                {
+                    // set timer and after it's over, check for ACK's.
+                    this.setTimerForACKs();
+                }
             }
+            
+            //windowSize number of packets have been sent
+            packetsSent += this.configuration.getWindowSize();
+            //TODO: print packets sent so far
         }
 
-        // once, all ack's arrive, empty window, and move onto the next window
-
         // when all window packets sent, send EOT
+        
     }
 
     /**
@@ -125,6 +135,8 @@ public class Sender extends Client
             // send packet to the network emulator
             UDPNetwork.sendPacket(socket, packet, this.configuration.getNetworkAddress(),
                     this.configuration.getNetworkPort());
+            
+            //TODO: print this packet sent
         }
         catch (SocketException e)
         {
