@@ -4,6 +4,29 @@ import sawProtocolSimulator.models.Packet;
 
 public class PacketUtilities
 {
+    /**
+     * The start of transmission packet.
+     * 
+     * Send when acquiring a channel.
+     */
+    public static int PACKET_START_OF_TRANSMISSION = 1;
+
+    /**
+     * Data packet.
+     */
+    public static int PACKET_DATA                  = 2;
+
+    /**
+     * ACK packet.
+     */
+    public static int PACKET_ACK                   = 3;
+
+    /**
+     * The end of transmission packet.
+     * 
+     * Telling the other side that the transmission has ended.
+     */
+    public static int PACKET_END_OF_TRANSMISSION   = 4;
 
     /**
      * Generates a packet with the details provided.
@@ -63,7 +86,7 @@ public class PacketUtilities
 
         return packet;
     }
-    
+
     /**
      * Generates a generic packet log. This can be put on the screen or in the log files.
      * 
@@ -77,9 +100,9 @@ public class PacketUtilities
     {
         StringBuilder log = new StringBuilder();
 
-        if(network)
+        if (network)
         {
-            if(forwarded)
+            if (forwarded)
             {
                 log.append("[FORWARDED] ");
             }
@@ -88,40 +111,40 @@ public class PacketUtilities
                 log.append("[DROPPED]   ");
             }
         }
-        
+
         log.append("Packet Type: ");
-        
-        switch(packet.getPacketType())
+
+        switch (packet.getPacketType())
         {
             case 1:
                 log.append("\n");
                 log.append("SOT \t");
                 log.append("\n");
-                
+
                 break;
-                
+
             case 2:
                 log.append("DATA\t");
                 log.append("Packet Number: " + packet.getSeqNum());
-                
+
                 break;
-                
+
             case 3:
                 log.append("ACK \t");
                 log.append("ACK Number:    " + packet.getAckNum());
-                
+
                 break;
-                
+
             case 4:
                 log.append("\n");
                 log.append("EOT \t");
                 log.append("\n");
-                
+
                 break;
         }
-        
+
         return log.toString();
-        
+
     }
 
 }
