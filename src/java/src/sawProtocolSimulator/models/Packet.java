@@ -59,6 +59,16 @@ public class Packet implements Serializable
     /**
      * Set the packet type.
      * 
+     * The type of packet, can either be:
+     * 
+     * - 1 = SOT (when acquiring the channel - start of transmission)
+     * 
+     * - 2 = DATA (data packet)
+     * 
+     * - 3 = ACK (acknowledgement of a data packet)
+     * 
+     * - 4 = EOT (when telling the other side that the transmission has ended)
+     * 
      * @param packetType the packetType to set
      */
     public void setPacketType(int packetType)
