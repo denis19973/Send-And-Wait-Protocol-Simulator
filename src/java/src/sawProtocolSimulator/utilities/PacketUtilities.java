@@ -89,7 +89,8 @@ public class PacketUtilities
     }
 
     /**
-     * Generates a generic packet log for network module. This can be put on the screen or in the log files.
+     * Generates a generic packet log for network module. This can be put on the screen or in the
+     * log files.
      * 
      * @param packet the packet to generate the logs for
      * @param forwarded if the packet was forwarded or dropped.
@@ -109,56 +110,75 @@ public class PacketUtilities
             log.append("[DROPPED]   ");
         }
 
-        log.append("Packet Type: ");
-
-        switch (packet.getPacketType())
-        {
-            case 1:
-                log.append("SOT \t");
-
-                break;
-
-            case 2:
-                log.append("DATA\t");
-                log.append("Packet Number: " + packet.getSeqNum());
-
-                break;
-
-            case 3:
-                log.append("ACK \t");
-                log.append("ACK Number:    " + packet.getAckNum());
-
-                break;
-
-            case 4:
-                log.append("EOT \t");
-
-                break;
-        }
+        log.append(PacketUtilities.generatePacketDetails(packet));
 
         return log.toString();
 
     }
 
     /**
-     * Generates a generic packet log for clients. This can be put on the screen or in the log files.
+     * Generates a generic packet log for clients. This can be put on the screen or in the log
+     * files.
      * 
      * @param packet the packet to generate the logs for
+     * @param sending true if sending packet, false if received it.
      * 
      * @return a generic packet log
      */
-    public static String generateClientPacketLog(Packet packet, ClientMode clientMode)
+    public static String generateClientPacketLog(Packet packet, boolean sending)
     {
         StringBuilder log = new StringBuilder();
 
-        if (clientMode == ClientMode.RECEIVER)
-        {
-            log.append("[RECEIVED] ");
-        }
-        else
+        if (sending)
         {
             log.append("[SENDING]  ");
         }
+        else
+        {
+            log.append("[RECEIVED] ");
+        }
+
+        log.append(PacketUtilities.generatePacketDetails(packet));
+
+        return log.toString();
+
+    }
+
+    /**
+     * Generate client log for when resending (data or ACK) stuff.
+     * 
+     * @param packet the packet to generate the log for
+     * @param resendingData true if resending data, false if resending ACK
+     * 
+     * @return log
+     */
+    public static String generateClientResendLog(Packet packet, boolean resendingData)
+    {
+        StringBuilder log = new StringBuilder();
+
+        if (resendingData)
+        {
+            log.append("[SENDING]       ");
+        }
+        else
+        {
+            log.append("[RESENDING_ACK] ");
+        }
+
+        log.append(PacketUtilities.generatePacketDetails(packet));
+
+        return log.toString();
+    }
+
+    /**
+     * Generate details for a packet.
+     * 
+     * @param packet the packet to generate details for
+     * @return packet log
+     */
+    public static String generatePacketDetails(Packet packet)
+    {
+        StringBuilder log = new StringBuilder();
 
         log.append("Packet Type: ");
 
