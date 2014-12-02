@@ -32,11 +32,6 @@ public class Sender extends Client
     private Timer             timer;
 
     /**
-     * Thread to wait for ack's.
-     */
-    private Thread            ackReceiver;
-
-    /**
      * Boolean switch to wait for Ack's.
      */
     private boolean           waitingForAcks;
@@ -236,50 +231,38 @@ public class Sender extends Client
      */
     private void receiveACKs()
     {
-        Runnable taskRunnable = new Runnable() {
+        try
+        {
+            // can block for a maximum of 2 seconds
+            this.listen.setSoTimeout(2000);
 
-            @Override
-            public void run()
+            /**
+             * Scan while packet window size isn't 0. If 0, all packets have been ACK'ed.
+             * AND Scan while the still waiting for ack's.
+             */
+            while (this.packetWindow.size() != 0 && this.waitingForAcks)
             {
-                try
-                {
-                    // can block for a maximum of 2 seconds
-                    Sender.this.listen.setSoTimeout(2000);
+                Packet packet = UDPNetwork.getPacket(Sender.this.listen);
 
-                    /**
-                     * Scan while packet window size isn't 0. If 0, all packets have been ACK'ed.
-                     * AND Scan while the thread hasn't been interrupted.
-                     */
-                    while (Sender.this.packetWindow.size() != 0
-                            && !Thread.currentThread().isInterrupted())
-                    {
-                        Packet packet = UDPNetwork.getPacket(Sender.this.listen);
-
-                        if (packet.getPacketType() == PacketUtilities.PACKET_ACK)
-                        {
-                            Sender.this.removePacketFromWindow(packet.getAckNum());
-                        }
-                    }
-                }
-                catch (SocketException e)
+                if (packet.getPacketType() == PacketUtilities.PACKET_ACK)
                 {
-                    Log.d(e.getMessage());
-                    System.exit(0); // fatal
-                }
-                catch (ClassNotFoundException e)
-                {
-                    Log.d(e.getMessage());
-                }
-                catch (IOException e)
-                {
-                    Log.d(e.getMessage());
+                    Sender.this.removePacketFromWindow(packet.getAckNum());
                 }
             }
-
-        };
-
-        this.ackReceiver = new Thread(taskRunnable);
-        this.ackReceiver.start();
+        }
+        catch (SocketException e)
+        {
+            Log.d(e.getMessage());
+            System.exit(0); // fatal
+        }
+        catch (ClassNotFoundException e)
+        {
+            Log.d(e.getMessage());
+        }
+        catch (IOException e)
+        {
+            Log.d(e.getMessage());
+        }
     }
 
     /**
@@ -311,8 +294,6 @@ public class Sender extends Client
 
         // not waiting for ack's now.
         this.waitingForAcks = false;
-
-        this.ackReceiver.interrupt();
     }
 
 }
