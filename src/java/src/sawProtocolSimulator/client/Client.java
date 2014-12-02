@@ -32,7 +32,7 @@ public abstract class Client
      * The main runner..where all the client running occurs (either sending or receiving).
      */
     public abstract void run();
-    
+
     /**
      * Scan some configuration from the user.
      * 
@@ -41,6 +41,8 @@ public abstract class Client
     public void takeInput()
     {
         Scanner scan = new Scanner(System.in);
+
+        // ######################################################### //
 
         System.out.println("Network Emulator Address");
         System.out.println("===================================");
@@ -57,20 +59,67 @@ public abstract class Client
 
         int networkPort = scan.nextInt();
 
+        // ######################################################### //
+
+        System.out.println("Transmitter Address");
+        System.out.println("===================================");
+        System.out.println("The IP Address of the machine which is acting as the transmitter.");
+        System.out.print("\nEnter IP Address here:\t");
+
+        String transmitterAddress = scan.nextLine();
+
+        System.out.println("Transmitter Port");
+        System.out.println("===================================");
+        System.out.println("The port of the machine which is acting as the transmitter.");
+        System.out.print("\nEnter port here:\t");
+
+        int transmitterPort = scan.nextInt();
+
+        // ######################################################### //
+
+        System.out.println("Receiver Address");
+        System.out.println("===================================");
+        System.out.println("The IP Address of the machine which is acting as the receiver.");
+        System.out.print("\nEnter IP Address here:\t");
+
+        String receiverAddress = scan.nextLine();
+
+        System.out.println("Receiver Port");
+        System.out.println("===================================");
+        System.out.println("The port of the machine which is acting as the receiver.");
+        System.out.print("\nEnter port here:\t");
+
+        int receiverPort = scan.nextInt();
+
+        // ######################################################### //
+
+        // set all configuration
+        setConfiguration(networkAddress, networkPort, transmitterAddress, transmitterPort,
+                receiverAddress, receiverPort);
+
+    }
+
+    private void setConfiguration(String networkAddress, int networkPort,
+            String transmitterAddress, int transmitterPort, String receiverAddress, int receiverPort)
+    {
         try
         {
             this.configuration.setNetworkAddress(InetAddress.getByName(networkAddress));
             this.configuration.setNetworkPort(networkPort);
+            this.configuration.setTransmitterAddress(InetAddress.getByName(transmitterAddress));
+            this.configuration.setTransmitterPort(transmitterPort);
+            this.configuration.setReceiverAddress(InetAddress.getByName(receiverAddress));
+            this.configuration.setReceiverPort(receiverPort);
+
         }
         catch (UnknownHostException e)
         {
             // client entered a network address which wasn't valid
+            System.out.println("Couldn't find one of the hosts you entered. Please try again!");
 
-            System.out.println("Couldn't find any hosts with the address " + networkAddress + "! "
-                    + "Please try again!");
+            // get input again
             takeInput();
         }
-
     }
 
     /**
