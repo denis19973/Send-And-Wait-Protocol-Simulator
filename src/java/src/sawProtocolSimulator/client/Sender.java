@@ -1,8 +1,6 @@
 package sawProtocolSimulator.client;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -249,7 +247,7 @@ public class Sender extends Client
                     Sender.this.listen.setSoTimeout(2000);
 
                     /**
-                     * Scan while packet window size isn't 0. If 0, all packets have been ACK'ed. 
+                     * Scan while packet window size isn't 0. If 0, all packets have been ACK'ed.
                      * AND Scan while the thread hasn't been interrupted.
                      */
                     while (Sender.this.packetWindow.size() != 0
@@ -265,18 +263,16 @@ public class Sender extends Client
                 }
                 catch (SocketException e)
                 {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Log.d(e.getMessage());
+                    System.exit(0); // fatal
                 }
                 catch (ClassNotFoundException e)
                 {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Log.d(e.getMessage());
                 }
                 catch (IOException e)
                 {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Log.d(e.getMessage());
                 }
             }
 
@@ -288,7 +284,7 @@ public class Sender extends Client
 
     /**
      * Checks all packets in the current window and removes the one whose acknowledgement number is
-     * equal to the ack number of the received packet.
+     * equal to the ACK number of the received packet.
      * 
      * @param ackNum the acknowledgement number
      */
@@ -298,9 +294,9 @@ public class Sender extends Client
         {
             if (this.packetWindow.get(i).getAckNum() == ackNum)
             {
-                this.packetWindow.remove(i);
+                Log.d(PacketUtilities.generateClientPacketLog(packetWindow.get(i), false));
 
-                // TODO: print THIS PACKET ACKED
+                this.packetWindow.remove(i);
             }
         }
     }
