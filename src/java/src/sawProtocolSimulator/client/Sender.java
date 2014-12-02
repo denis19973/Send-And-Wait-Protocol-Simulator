@@ -180,35 +180,6 @@ public class Sender extends Client
     }
 
     /**
-     * Send a packet to the network emulator.
-     * 
-     * @param packet the packet to send.
-     */
-    private void sendPacket(Packet packet)
-    {
-        try
-        {
-            DatagramSocket socket = UDPNetwork.createSocket();
-
-            // send packet to the network emulator
-            UDPNetwork.sendPacket(socket, packet, this.configuration.getNetworkAddress(),
-                    this.configuration.getNetworkPort());
-
-            // TODO: print this packet sent
-        }
-        catch (SocketException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Generate packets for a full window.
      */
     private void generateWindowAndSend()

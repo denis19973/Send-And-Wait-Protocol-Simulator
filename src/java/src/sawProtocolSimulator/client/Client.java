@@ -1,11 +1,15 @@
 package sawProtocolSimulator.client;
 
+import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import sawProtocolSimulator.models.ClientConfiguration;
 import sawProtocolSimulator.models.Packet;
+import sawProtocolSimulator.network.UDPNetwork;
 
 public abstract class Client
 {
@@ -134,6 +138,35 @@ public abstract class Client
         setConfiguration(networkAddress, networkPort, transmitterAddress, transmitterPort,
                 receiverAddress, receiverPort, maxPacketsToSend, windowSize, maxTimeout);
 
+    }
+    
+    /**
+     * Send a packet to the network emulator.
+     * 
+     * @param packet the packet to send.
+     */
+    protected void sendPacket(Packet packet)
+    {
+        try
+        {
+            DatagramSocket socket = UDPNetwork.createSocket();
+
+            // send packet to the network emulator
+            UDPNetwork.sendPacket(socket, packet, this.configuration.getNetworkAddress(),
+                    this.configuration.getNetworkPort());
+
+            // TODO: print this packet sent
+        }
+        catch (SocketException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
