@@ -15,8 +15,8 @@ public class Receiver extends Client
      * 
      * Initialized to 0 in the constructor.
      */
-    private int currentSequenceNumber;
-    
+    private int            currentSequenceNumber;
+
     /**
      * The UDP socket, the receiver is listening on.
      */
@@ -31,7 +31,7 @@ public class Receiver extends Client
     {
         super(clientMode);
         this.currentSequenceNumber = 0;
-        
+
         try
         {
             this.listen = UDPNetwork.createServer(this.configuration.getReceiverPort());
@@ -57,7 +57,7 @@ public class Receiver extends Client
 
         // listen for EOT
     }
-    
+
     /**
      * Waits for Sender to send a SOT.
      */
@@ -65,20 +65,54 @@ public class Receiver extends Client
     {
         try
         {
-           
+
             Packet sotPacket = UDPNetwork.getPacket(this.listen);
-            
-            if(sotPacket.getPacketType() == PacketUtilities.PACKET_START_OF_TRANSMISSION)
+
+            if (sotPacket.getPacketType() == PacketUtilities.PACKET_START_OF_TRANSMISSION)
             {
-                //TODO: print SOT packet.
+                // TODO: print SOT packet.
+
+                // send SOT back to signify receive.
+                this.sendPacket(this.makePacket(PacketUtilities.PACKET_START_OF_TRANSMISSION));
             }
-            else 
+            else
             {
-                //TODO: exception..close receiver.
-                //crash client - didn't get SOT
+                // TODO: exception..close receiver.
+
+                // malicious packet - continue.
+                this.waitForOtherSideToTakeControl();
             }
         }
         catch (ClassNotFoundException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Send a packet to the network emulator.
+     * 
+     * @param packet the packet to send.
+     */
+    private void sendPacket(Packet packet)
+    {
+        try
+        {
+            DatagramSocket socket = UDPNetwork.createSocket();
+
+            // send packet to the network emulator
+            UDPNetwork.sendPacket(socket, packet, this.configuration.getNetworkAddress(),
+                    this.configuration.getNetworkPort());
+
+            // TODO: print this packet sent
+        }
+        catch (SocketException e)
         {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -43,6 +43,11 @@ public class Sender extends Client
     private boolean           waitingForAcks;
 
     /**
+     * The UDP socket, the sender is listening on.
+     */
+    private DatagramSocket    listen;
+
+    /**
      * Create a client, whose sole purpose is to send (transmit) to the receiver.
      * 
      * @param clientMode the client mode.
@@ -53,6 +58,17 @@ public class Sender extends Client
         this.sequenceNumber = 1;
         this.packetWindow = new ArrayList<Packet>();
         this.timer = new Timer();
+
+        try
+        {
+            this.listen = UDPNetwork.createServer(Sender.this.configuration.getTransmitterPort());
+        }
+        catch (SocketException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -118,11 +134,33 @@ public class Sender extends Client
 
         // send the packet
         this.sendPacket(packet);
-        
+
+        // TODO: print packet
+
+        // wait for SOT packet from receiver
         try
         {
-            //wait for 2.5 seconds before sending data packets.
-            Thread.sleep(2500);
+            Packet receiverResponse = UDPNetwork.getPacket(this.listen);
+
+            if (receiverResponse.getPacketType() == PacketUtilities.PACKET_START_OF_TRANSMISSION)
+            {
+                // TODO: print SOT
+
+                // TODO: start transaction.
+            }
+
+            // wait for 2 seconds before sending data packets.
+            Thread.sleep(2000);
+        }
+        catch (ClassNotFoundException e1)
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        catch (IOException e1)
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
         }
         catch (InterruptedException e)
         {
@@ -248,18 +286,15 @@ public class Sender extends Client
             {
                 try
                 {
-                    DatagramSocket listen =
-                            UDPNetwork.createServer(Sender.this.configuration.getTransmitterPort());
-
                     // can block for a maximum of 2 seconds
-                    listen.setSoTimeout(2000);
+                    Sender.this.listen.setSoTimeout(2000);
 
                     // scan while packet window size isn't 0. If 0, all packets have been acked.
                     // scan while the thread hasn't been interrupted
                     while (Sender.this.packetWindow.size() != 0
                             || !Thread.currentThread().isInterrupted())
                     {
-                        Packet packet = UDPNetwork.getPacket(listen);
+                        Packet packet = UDPNetwork.getPacket(Sender.this.listen);
 
                         if (packet.getPacketType() == PacketUtilities.PACKET_ACK)
                         {
