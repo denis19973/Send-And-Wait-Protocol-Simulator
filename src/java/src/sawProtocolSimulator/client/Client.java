@@ -16,7 +16,7 @@ public abstract class Client
     /**
      * Configuration of the network module.
      */
-    private ClientConfiguration configuration;
+    protected ClientConfiguration configuration;
 
     /**
      * Constructor. Initializes the client in a mode.
