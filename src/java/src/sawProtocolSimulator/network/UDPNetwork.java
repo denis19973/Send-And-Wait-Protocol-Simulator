@@ -53,7 +53,7 @@ public class UDPNetwork
     public static Packet getPacket(DatagramSocket socket) throws IOException,
             ClassNotFoundException
     {
-        byte[] dataBytes = new byte[4096];
+        byte[] dataBytes = new byte[1024];
         DatagramPacket datagramPacket = new DatagramPacket(dataBytes, dataBytes.length);
         socket.receive(datagramPacket);
         dataBytes = datagramPacket.getData();
@@ -75,7 +75,7 @@ public class UDPNetwork
      */
     public static void sendPacket(DatagramSocket socket, Packet packet) throws IOException
     {
-        byte[] dataBytes = new byte[4096];
+        byte[] dataBytes = new byte[1024];
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
