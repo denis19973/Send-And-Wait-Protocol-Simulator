@@ -39,7 +39,20 @@ public class Sender extends Client
     @Override
     public void run()
     {
-
+        //take control of the channel
+        this.sendTakeControlPacket();
+        
+        //generate packets for a window
+        
+        //send the packets in the window
+        
+        //wait for ack's for each packet
+        
+        //if ack's don't arrive in time, send packet again.
+        
+        //once, all ack's arrive, empty window, and move onto the next window
+        
+        //when all window packets sent, send EOT
     }
 
     /**
