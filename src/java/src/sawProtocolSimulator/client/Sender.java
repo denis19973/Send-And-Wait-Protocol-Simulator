@@ -222,7 +222,6 @@ public class Sender extends Client
             public void run()
             {
                 // call ackTimeout and check which packets have been ACK'ed.
-                System.out.println("timeout");
                 Sender.this.ackTimeout();
             }
 
