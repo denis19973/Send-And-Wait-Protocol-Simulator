@@ -9,6 +9,9 @@ import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.Scanner;
 
+import sawProtocolSimulator.client.ClientMode;
+import sawProtocolSimulator.client.Receiver;
+import sawProtocolSimulator.client.Sender;
 import sawProtocolSimulator.exceptions.CouldNotReadConfigurationException;
 import sawProtocolSimulator.models.NetworkConfiguration;
 import sawProtocolSimulator.networkEmulator.Network;
@@ -38,10 +41,30 @@ public class Main
         {
             case 1:
                 //be the sender
+                Sender sender = new Sender(ClientMode.SENDER);
+                
+                //take user input
+                sender.takeInput();
+                
+                //print all loaded configuration
+                sender.printConfiguration();
+                
+                //start
+                sender.run();
                 
                 break;
             case 2:
                 //be the receiver
+                Receiver receiver = new Receiver(ClientMode.RECEIVER);
+                
+                //take user input
+                receiver.takeInput();
+                
+                //print all loaded configuration
+                receiver.printConfiguration();
+                
+                //start
+                receiver.run();
 
                 break;
             case 3:
