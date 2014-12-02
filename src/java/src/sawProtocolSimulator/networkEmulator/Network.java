@@ -163,7 +163,7 @@ public class Network
     {
         System.out.println("\n\n");
         System.out.println("Drop Rate (between 1 and 100): " + this.dropRate);
-        System.out.println("Average Delay Per Packet (in seconds): " + this.averageDelayPerPacket);
+        System.out.println("Average Delay Per Packet (in ms): " + this.averageDelayPerPacket);
         System.out.println("Sender: " + this.configuration.getSender() + ":"
                 + this.configuration.getSenderPort());
         System.out.println("Receiver: " + this.configuration.getReceiver() + ":"
