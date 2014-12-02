@@ -63,5 +63,53 @@ public class PacketUtilities
 
         return packet;
     }
+    
+    public static String generatePacketLog(Packet packet, boolean forwarded)
+    {
+        StringBuilder log = new StringBuilder();
+
+        if(forwarded)
+        {
+            log.append("[FORWARDED] ");
+        }
+        else
+        {
+            log.append("[DROPPED]   ");
+        }
+        
+        log.append("Packet Type: ");
+        
+        switch(packet.getPacketType())
+        {
+            case 1:
+                log.append("\n");
+                log.append("SOT \t");
+                log.append("\n");
+                
+                break;
+                
+            case 2:
+                log.append("DATA\t");
+                log.append("Packet Number: " + packet.getSeqNum());
+                
+                break;
+                
+            case 3:
+                log.append("ACK \t");
+                log.append("ACK Number:    " + packet.getAckNum());
+                
+                break;
+                
+            case 4:
+                log.append("\n");
+                log.append("EOT \t");
+                log.append("\n");
+                
+                break;
+        }
+        
+        return log.toString();
+        
+    }
 
 }
