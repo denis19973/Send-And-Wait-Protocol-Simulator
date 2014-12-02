@@ -1,5 +1,6 @@
 package sawProtocolSimulator.networkEmulator;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import sawProtocolSimulator.models.NetworkConfiguration;
@@ -17,14 +18,14 @@ public class Network
      * A random number between 1 and 100 will be generated for each packet received and if that
      * random number is below or equal to this drop rate, that packet will be dropped.
      */
-    private int           dropRate;
+    private int                  dropRate;
 
     /**
      * The average delay per packet.
      * 
      * In seconds: example: 0.05 seconds.
      */
-    private double        averageDelayPerPacket;
+    private double               averageDelayPerPacket;
 
     /**
      * Construct the network module.
@@ -35,15 +36,32 @@ public class Network
     {
         this.configuration = configuration;
     }
-    
+
     /**
      * The main runner..where all the main Network emulation occurs!
      */
     public void run()
     {
-        
+
     }
-    
+
+    /**
+     * Returns a randomly calculated drop rate threshold. If the packet drop rate specified by the
+     * user is greater than or equal to this number, it is dropped.
+     * 
+     * Essentially a random number between 1 and 100, inclusive.
+     * 
+     * @return a random drop rate threshold
+     */
+    private int getDropRateThreshold()
+    {
+        Random random = new Random();
+
+        int threshold = random.nextInt((100 - 1) + 1) + 1;
+
+        return threshold;
+    }
+
     /**
      * Scan configuration from the user.
      * 
