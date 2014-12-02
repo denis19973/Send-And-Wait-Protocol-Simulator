@@ -142,6 +142,7 @@ public class Network
      */
     public void takeInput()
     {
+        Scanner scan = new Scanner(System.in);
         System.out.println("\n\n");
         System.out.println("Packet Drop Rate (1 and 100)");
         System.out.println("=================================");
@@ -150,8 +151,10 @@ public class Network
                 + "is below or equal to this drop rate, that packet will be dropped.");
         System.out.print("\nEnter Drop Rate (1-100):\t");
 
-        Scanner scan = new Scanner(System.in);
-        this.dropRate = scan.nextInt();
+        if(scan.hasNextInt())
+        {
+            this.dropRate = scan.nextInt();
+        }
 
         System.out.println("\n\n");
         System.out.println("Average Delay (in milliseconds)");
@@ -160,7 +163,11 @@ public class Network
                 + "be delayed by the time interval specified here."
                 + "\nExample delay: 0.01 seconds");
         System.out.print("\nEnter Average Delay Per Packet (in ms):\t");
-        this.averageDelayPerPacket = scan.nextInt();
+
+        if(scan.hasNextInt())
+        {
+            this.averageDelayPerPacket = scan.nextInt();
+        }
         
         scan.close();
     }
@@ -179,4 +186,46 @@ public class Network
                 + this.configuration.getReceiverPort());
         System.out.println("\n\n");
     }
+
+    /**
+     * Get the drop rate.
+     * 
+     * @return the dropRate
+     */
+    public int getDropRate()
+    {
+        return dropRate;
+    }
+
+    /**
+     * Set the drop rate.
+     * 
+     * @param dropRate the dropRate to set
+     */
+    public void setDropRate(int dropRate)
+    {
+        this.dropRate = dropRate;
+    }
+
+    /**
+     * Get the average delay per packet.
+     * 
+     * @return the averageDelayPerPacket
+     */
+    public int getAverageDelayPerPacket()
+    {
+        return averageDelayPerPacket;
+    }
+
+    /**
+     * Set the average delay per packet.
+     * 
+     * @param averageDelayPerPacket the averageDelayPerPacket to set
+     */
+    public void setAverageDelayPerPacket(int averageDelayPerPacket)
+    {
+        this.averageDelayPerPacket = averageDelayPerPacket;
+    }
+    
+    
 }
