@@ -36,7 +36,7 @@ public class UDPNetwork
      * 
      * @throws SocketException if the socket can't be created
      */
-    public static DatagramSocket createClient() throws SocketException
+    public static DatagramSocket createSocket() throws SocketException
     {
         return new DatagramSocket();
     }
@@ -66,7 +66,7 @@ public class UDPNetwork
     }
 
     /**
-     * Send a Packet from the UDP socket.
+     * Send a Packet from the UDP socket to destination specified inside the Packet.
      * 
      * @param socket the UDP socket to send the packet through
      * @param packet the Packet to send
@@ -74,6 +74,26 @@ public class UDPNetwork
      * @throws IOException if the packet can't be sent
      */
     public static void sendPacket(DatagramSocket socket, Packet packet) throws IOException
+    {
+        InetAddress destinationAddress = InetAddress.getByName(packet.getDestinationAddress());
+
+        // dispatch request to the other method
+        sendPacket(socket, packet, destinationAddress, packet.getDestinationPort());
+    }
+
+    /**
+     * Send a Packet from the UDP socket to a destination different from the one specified in the
+     * Packet.
+     * 
+     * @param socket the UDP socket to send the packet through
+     * @param packet the Packet to send
+     * @param destinationAddress the address to send the packet to
+     * @param destinationPort the port number at the address
+     * 
+     * @throws IOException if the packet can't be sent
+     */
+    public static void sendPacket(DatagramSocket socket, Packet packet,
+            InetAddress destinationAddress, int destinationPort) throws IOException
     {
         byte[] dataBytes = new byte[1024];
 
@@ -85,13 +105,11 @@ public class UDPNetwork
 
         dataBytes = byteArrayOutputStream.toByteArray();
 
-        InetAddress destinationAddress = InetAddress.getByName(packet.getDestinationAddress());
-
         DatagramPacket datagramPacket =
-                new DatagramPacket(dataBytes, dataBytes.length, destinationAddress,
-                        packet.getDestinationPort());
+                new DatagramPacket(dataBytes, dataBytes.length, destinationAddress, destinationPort);
 
         socket.send(datagramPacket);
 
     }
+
 }
