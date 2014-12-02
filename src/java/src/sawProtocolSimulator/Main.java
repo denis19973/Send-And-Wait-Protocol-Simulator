@@ -115,7 +115,6 @@ public class Main
             NetworkConfiguration configuration = loadNetworkConfiguration();
             Network networkModule = new Network(configuration);
 
-            networkModule.takeInput();
             networkModule.printConfiguration();
 
             // run network module
@@ -231,6 +230,9 @@ public class Main
                     .getProperty("senderAddress")));
             configuration.setSenderPort(Integer.parseInt(networkProperties
                     .getProperty("senderPort")));
+            configuration.setDropRate(Integer.parseInt(networkProperties.getProperty("dropRate")));
+            configuration.setAverageDelayPerPacket(Integer.parseInt(networkProperties
+                    .getProperty("averageDelayPerPacket")));
 
         }
         catch (FileNotFoundException e)
