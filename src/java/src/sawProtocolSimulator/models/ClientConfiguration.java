@@ -104,5 +104,84 @@ public class ClientConfiguration
         this.networkPort = networkPort;
     }
 
+    /**
+     * Get the address of the transmitter (sender).
+     * 
+     * @return the transmitterAddress
+     */
+    public InetAddress getTransmitterAddress()
+    {
+        return transmitterAddress;
+    }
+
+    /**
+     * Set the address of the transmitter (sender).
+     * 
+     * @param transmitterAddress the transmitterAddress to set
+     */
+    public void setTransmitterAddress(InetAddress transmitterAddress)
+    {
+        this.transmitterAddress = transmitterAddress;
+    }
+
+    /**
+     * Get the port number of the transmitter (sender).
+     * 
+     * @return the transmitterPort
+     */
+    public int getTransmitterPort()
+    {
+        return transmitterPort;
+    }
+
+    /**
+     * Set the port number of the transmitter (sender).
+     * 
+     * @param transmitterPort the transmitterPort to set
+     */
+    public void setTransmitterPort(int transmitterPort)
+    {
+        this.transmitterPort = transmitterPort;
+    }
+
+    /**
+     * Get the address of the receiver.
+     * 
+     * @return the receiverAddress
+     */
+    public InetAddress getReceiverAddress()
+    {
+        return receiverAddress;
+    }
+
+    /**
+     * Set the address of the receiver.
+     * 
+     * @param receiverAddress the receiverAddress to set
+     */
+    public void setReceiverAddress(InetAddress receiverAddress)
+    {
+        this.receiverAddress = receiverAddress;
+    }
+
+    /**
+     * Get the port number of the receiver.
+     * 
+     * @return the receiverPort
+     */
+    public int getReceiverPort()
+    {
+        return receiverPort;
+    }
+
+    /**
+     * Set the port number of the receiver.
+     * 
+     * @param receiverPort the receiverPort to set
+     */
+    public void setReceiverPort(int receiverPort)
+    {
+        this.receiverPort = receiverPort;
+    }
 
 }
