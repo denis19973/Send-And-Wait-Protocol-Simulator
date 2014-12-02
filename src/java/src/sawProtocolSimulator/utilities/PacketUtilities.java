@@ -1,6 +1,5 @@
 package sawProtocolSimulator.utilities;
 
-import sawProtocolSimulator.client.ClientMode;
 import sawProtocolSimulator.models.Packet;
 
 public class PacketUtilities
