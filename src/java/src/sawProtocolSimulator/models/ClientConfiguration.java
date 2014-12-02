@@ -45,12 +45,24 @@ public class ClientConfiguration
      * 
      * @param networkAddress the address of the network emulator
      * @param networkPort the port number of the network emulator
+     * @param transmitterAddress the address of the transmitter (sender)
+     * @param transmitterPort the port number of the transmitter (sender)
+     * @param receiverAddress the address of the receiver
+     * @param receiverPort the port number of the receiver
      */
-    public ClientConfiguration(InetAddress networkAddress, int networkPort)
+    public ClientConfiguration(InetAddress networkAddress, int networkPort,
+            InetAddress transmitterAddress, int transmitterPort, InetAddress receiverAddress,
+            int receiverPort)
     {
         this.networkAddress = networkAddress;
         this.networkPort = networkPort;
+        this.transmitterAddress = transmitterAddress;
+        this.transmitterPort = transmitterPort;
+        this.receiverAddress = receiverAddress;
+        this.receiverPort = receiverPort;
     }
+
+
 
     /**
      * Get the Address of the network emulator.
