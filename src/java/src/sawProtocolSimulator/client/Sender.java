@@ -48,8 +48,35 @@ public class Sender extends Client
     private void sendTakeControlPacket()
     {
         // create a SOT packet
-        Packet packet = makePacket(1);
+        Packet packet = this.makePacket(PacketUtilities.PACKET_START_OF_TRANSMISSION);
 
+        //send the packet
+        this.sendPacket(packet);
+    }
+
+    /**
+     * Creates a packet from the configuration, sequence number, packet type and other details.
+     * 
+     * @param packetType the type of packet to make
+     * 
+     * @return a Packet
+     */
+    private Packet makePacket(int packetType)
+    {
+        return PacketUtilities.makePacket(this.configuration.getReceiverAddress().getHostAddress(),
+                this.configuration.getReceiverPort(), this.configuration.getTransmitterAddress()
+                        .getHostAddress(), this.configuration.getTransmitterPort(), packetType,
+                this.sequenceNumber, this.sequenceNumber, this.configuration.getWindowSize());
+
+    }
+    
+    /**
+     * Send a packet to the network emulator.
+     * 
+     * @param packet the packet to send.
+     */
+    private void sendPacket(Packet packet)
+    {
         try
         {
             DatagramSocket socket = UDPNetwork.createSocket();
@@ -68,22 +95,6 @@ public class Sender extends Client
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
-
-    /**
-     * Creates a packet from the configuration, sequence number, packet type and other details.
-     * 
-     * @param packetType the type of packet to make
-     * 
-     * @return a Packet
-     */
-    private Packet makePacket(int packetType)
-    {
-        return PacketUtilities.makePacket(this.configuration.getReceiverAddress().getHostAddress(),
-                this.configuration.getReceiverPort(), this.configuration.getTransmitterAddress()
-                        .getHostAddress(), this.configuration.getTransmitterPort(), packetType,
-                this.sequenceNumber, this.sequenceNumber, this.configuration.getWindowSize());
-
-    }
+    
 }
