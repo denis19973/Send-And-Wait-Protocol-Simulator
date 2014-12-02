@@ -48,7 +48,7 @@ public class Packet implements Serializable
     /**
      * Destination Port.
      */
-    private String destinationPort;
+    private int    destinationPort;
 
     /**
      * Source Address.
@@ -58,7 +58,7 @@ public class Packet implements Serializable
     /**
      * Source Port.
      */
-    private String sourcePort;
+    private int    sourcePort;
 
     /**
      * Default Constructor.
@@ -185,7 +185,9 @@ public class Packet implements Serializable
     public String toString()
     {
         return "Packet [packetType=" + packetType + ", seqNum=" + seqNum + ", windowSize="
-                + windowSize + ", ackNum=" + ackNum + ", data=" + data + "]";
+                + windowSize + ", ackNum=" + ackNum + ", data=" + data + ", destinationAddress="
+                + destinationAddress + ", destinationPort=" + destinationPort + ", sourceAddress="
+                + sourceAddress + ", sourcePort=" + sourcePort + "]";
     }
 
 }
