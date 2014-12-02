@@ -68,14 +68,14 @@ public class Network
                 if (packet.getPacketType() == 1 || packet.getPacketType() == 4)
                 {
                     UDPNetwork.sendPacket(socket, packet);
-                    System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
+                    System.out.println(PacketUtilities.generateNetworkPacketLog(packet, true));
                 }
                 else
                 {
                     // if packet drop rate is lower than the threshold, drop it.
                     if (this.getDropRateThreshold() <= this.dropRate)
                     {
-                        System.out.println(PacketUtilities.generatePacketLog(packet, true, false));
+                        System.out.println(PacketUtilities.generateNetworkPacketLog(packet, false));
                     }
                     else
                     {
@@ -86,7 +86,7 @@ public class Network
 
                         UDPNetwork.sendPacket(socket, packet);
 
-                        System.out.println(PacketUtilities.generatePacketLog(packet, true, true));
+                        System.out.println(PacketUtilities.generateNetworkPacketLog(packet, true));
                     }
                 }
             }

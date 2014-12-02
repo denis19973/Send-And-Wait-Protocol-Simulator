@@ -1,5 +1,6 @@
 package sawProtocolSimulator.utilities;
 
+import sawProtocolSimulator.client.ClientMode;
 import sawProtocolSimulator.models.Packet;
 
 public class PacketUtilities
@@ -88,28 +89,24 @@ public class PacketUtilities
     }
 
     /**
-     * Generates a generic packet log. This can be put on the screen or in the log files.
+     * Generates a generic packet log for network module. This can be put on the screen or in the log files.
      * 
      * @param packet the packet to generate the logs for
-     * @param network if this was called from the network module
      * @param forwarded if the packet was forwarded or dropped.
      * 
      * @return a generic packet log
      */
-    public static String generatePacketLog(Packet packet, boolean network, boolean forwarded)
+    public static String generateNetworkPacketLog(Packet packet, boolean forwarded)
     {
         StringBuilder log = new StringBuilder();
 
-        if (network)
+        if (forwarded)
         {
-            if (forwarded)
-            {
-                log.append("[FORWARDED] ");
-            }
-            else
-            {
-                log.append("[DROPPED]   ");
-            }
+            log.append("[FORWARDED] ");
+        }
+        else
+        {
+            log.append("[DROPPED]   ");
         }
 
         log.append("Packet Type: ");
@@ -117,9 +114,7 @@ public class PacketUtilities
         switch (packet.getPacketType())
         {
             case 1:
-                log.append("\n");
                 log.append("SOT \t");
-                log.append("\n");
 
                 break;
 
@@ -136,9 +131,58 @@ public class PacketUtilities
                 break;
 
             case 4:
-                log.append("\n");
                 log.append("EOT \t");
-                log.append("\n");
+
+                break;
+        }
+
+        return log.toString();
+
+    }
+
+    /**
+     * Generates a generic packet log for clients. This can be put on the screen or in the log files.
+     * 
+     * @param packet the packet to generate the logs for
+     * 
+     * @return a generic packet log
+     */
+    public static String generateClientPacketLog(Packet packet, ClientMode clientMode)
+    {
+        StringBuilder log = new StringBuilder();
+
+        if (clientMode == ClientMode.RECEIVER)
+        {
+            log.append("[RECEIVED] ");
+        }
+        else
+        {
+            log.append("[SENDING]  ");
+        }
+
+        log.append("Packet Type: ");
+
+        switch (packet.getPacketType())
+        {
+            case 1:
+                log.append("SOT \t");
+
+                break;
+
+            case 2:
+                log.append("DATA\t");
+                log.append("Packet Number: " + packet.getSeqNum());
+
+                break;
+
+            case 3:
+                log.append("ACK \t");
+                log.append("ACK Number:    " + packet.getAckNum());
+
+                break;
+
+            case 4:
+                log.append("EOT \t");
 
                 break;
         }
