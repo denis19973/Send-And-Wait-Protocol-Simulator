@@ -1,9 +1,14 @@
 package sawProtocolSimulator.networkEmulator;
 
+import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.SocketException;
 import java.util.Random;
 import java.util.Scanner;
 
 import sawProtocolSimulator.models.NetworkConfiguration;
+import sawProtocolSimulator.models.Packet;
+import sawProtocolSimulator.network.UDPNetwork;
 
 public class Network
 {
@@ -42,7 +47,35 @@ public class Network
      */
     public void run()
     {
-
+        try
+        {
+            DatagramSocket socket = UDPNetwork.createServer(9000);
+            Packet packet = UDPNetwork.getPacket(socket);
+            
+            //if it's a control packet, let it go through.
+            if(packet.getPacketType() == 1 || packet.getPacketType() == 4)
+            {
+                UDPNetwork.sendPacket(socket, packet);
+            }
+            else
+            {
+                if(this.getDropRateThreshold() >= this.dropRate)
+                {
+                }
+            }
+        }
+        catch (SocketException e)
+        {
+            //socket wasn't created, log and crash the program.
+        }
+        catch (ClassNotFoundException e)
+        {
+            //class wasn't read while reading from the UDP network. Ignore and move (natural noise).
+        }
+        catch (IOException e)
+        {
+            //couldn't read from the socket.
+        }
     }
 
     /**
