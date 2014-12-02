@@ -2,7 +2,12 @@ package sawProtocolSimulator.client;
 
 public class Receiver extends Client
 {
-    
+
+    /**
+     * The current sequence number.
+     * 
+     * Initialized to 0 in the constructor.
+     */
     private int sequenceNumber;
 
     /**
@@ -19,7 +24,7 @@ public class Receiver extends Client
     @Override
     public void run()
     {
-
+        
     }
 
 }
