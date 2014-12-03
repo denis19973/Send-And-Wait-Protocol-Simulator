@@ -141,7 +141,7 @@ public class Main
     /**
      * Parse the client configuration file and fill up the ClientConfiguration model with it.
      * 
-     * @return Configuration the configuration parsed from the config file; null if nothing read.
+     * @return Configuration the configuration parsed from the configuration file; null if nothing read.
      * @throws CouldNotReadConfigurationException if the file cannot be parsed.
      */
     public static ClientConfiguration loadClientConfiguration()
@@ -212,7 +212,7 @@ public class Main
     /**
      * Parse the network configuration file and fill up the NetworkConfiguration model with it.
      * 
-     * @return Configuration the configuration parsed from the config file; null if nothing read.
+     * @return Configuration the configuration parsed from the configuration file; null if nothing read.
      * @throws CouldNotReadConfigurationException if the file cannot be parsed.
      */
     public static NetworkConfiguration loadNetworkConfiguration()
