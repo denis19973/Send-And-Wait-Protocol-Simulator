@@ -23,7 +23,7 @@ public class Log
      */
     public static void d(String log)
     {
-        log = Log.getCurrentTime() + ":--  " + log;
+        log = Log.getCurrentTime() + " " + log;
         
         // print to screen for now
         System.out.println(log);
@@ -31,7 +31,7 @@ public class Log
         // log to file
         try
         {
-            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(Log.logFile)));
+            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(Log.logFile, true)));
             printWriter.println(log);
             printWriter.close();
         }
