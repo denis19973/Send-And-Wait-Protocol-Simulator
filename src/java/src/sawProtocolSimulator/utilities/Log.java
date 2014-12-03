@@ -28,6 +28,7 @@ public class Log
         {
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("logs.log")));
             printWriter.println(log);
+            printWriter.close();
         }
         catch (IOException e)
         {
