@@ -78,4 +78,4 @@ target/
 hs_err_pid*
 
 # App specific
-.sawlog
+*.sawlog
