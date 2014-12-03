@@ -97,6 +97,9 @@ public class Sender extends Client
 
         // when all window packets sent, send EOT
         this.sendEndOfTransmissionPacket();
+        
+        //exit
+        System.exit(0);
     }
 
     /**
