@@ -12,6 +12,11 @@ public class Log
 {
 
     /**
+     * Name of the log file.
+     */
+    public static String logFile;
+    
+    /**
      * Simply logs to the command line and a file.
      * 
      * @param log the message to log.
@@ -26,7 +31,7 @@ public class Log
         // log to file
         try
         {
-            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("logs.log")));
+            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(Log.logFile)));
             printWriter.println(log);
             printWriter.close();
         }

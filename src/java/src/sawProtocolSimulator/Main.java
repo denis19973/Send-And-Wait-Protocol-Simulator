@@ -62,6 +62,7 @@ public class Main
                 // print all loaded configuration
                 sender.printConfiguration();
 
+                Log.logFile = "sender.sawlog";
                 Log.d("You are now a SENDER!");
                 
                 // start
@@ -87,7 +88,8 @@ public class Main
 
                 // print all loaded configuration
                 receiver.printConfiguration();
-                
+
+                Log.logFile = "receiver.sawlog";
                 Log.d("You are now a RECEIVER!");
 
                 // start
@@ -121,6 +123,7 @@ public class Main
 
             networkModule.printConfiguration();
 
+            Log.logFile = "network.sawlog";
             Log.d("You are now the Network Module!");
             
             // run network module
