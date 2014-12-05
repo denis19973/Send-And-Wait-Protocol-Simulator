@@ -40,6 +40,11 @@ public class NetworkConfiguration
     private int         averageDelayPerPacket;
 
     /**
+     * Port the network emulator will run on!
+     */
+    private int         networkPort;
+
+    /**
      * Default constructor.
      */
     public NetworkConfiguration()
@@ -54,9 +59,10 @@ public class NetworkConfiguration
      * @param receiverPort Receiver Port
      * @param dropRate Drop Rate
      * @param averageDelayPerPacket Average Delay Per Packet
+     * @param networkPort port the network emulator will run on
      */
     public NetworkConfiguration(InetAddress sender, int senderPort, InetAddress receiver,
-            int receiverPort, int dropRate, int averageDelayPerPacket)
+            int receiverPort, int dropRate, int averageDelayPerPacket, int networkPort)
     {
         this.sender = sender;
         this.senderPort = senderPort;
@@ -64,6 +70,7 @@ public class NetworkConfiguration
         this.receiverPort = receiverPort;
         this.dropRate = dropRate;
         this.averageDelayPerPacket = averageDelayPerPacket;
+        this.networkPort = networkPort;
     }
 
     /**
@@ -185,10 +192,24 @@ public class NetworkConfiguration
     {
         this.averageDelayPerPacket = averageDelayPerPacket;
     }
+    
+    /**
+     * @return the networkPort
+     */
+    public int getNetworkPort()
+    {
+        return networkPort;
+    }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /**
+     * @param networkPort the networkPort to set
+     */
+    public void setNetworkPort(int networkPort)
+    {
+        this.networkPort = networkPort;
+    }
+
+    /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
@@ -196,7 +217,8 @@ public class NetworkConfiguration
     {
         return "NetworkConfiguration [sender=" + sender + ", senderPort=" + senderPort
                 + ", receiver=" + receiver + ", receiverPort=" + receiverPort + ", dropRate="
-                + dropRate + ", averageDelayPerPacket=" + averageDelayPerPacket + "]";
+                + dropRate + ", averageDelayPerPacket=" + averageDelayPerPacket + ", networkPort="
+                + networkPort + "]";
     }
 
 }
