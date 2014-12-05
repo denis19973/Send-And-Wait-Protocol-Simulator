@@ -64,7 +64,7 @@ public class Main
 
                 Log.logFile = "sender.sawlog";
                 Log.d("You are now a SENDER!");
-                
+
                 // start
                 sender.run();
 
@@ -125,7 +125,7 @@ public class Main
 
             Log.logFile = "network.sawlog";
             Log.d("You are now the Network Module!");
-            
+
             // run network module
             networkModule.run();
         }
@@ -141,7 +141,8 @@ public class Main
     /**
      * Parse the client configuration file and fill up the ClientConfiguration model with it.
      * 
-     * @return Configuration the configuration parsed from the configuration file; null if nothing read.
+     * @return Configuration the configuration parsed from the configuration file; null if nothing
+     *         read.
      * @throws CouldNotReadConfigurationException if the file cannot be parsed.
      */
     public static ClientConfiguration loadClientConfiguration()
@@ -212,7 +213,8 @@ public class Main
     /**
      * Parse the network configuration file and fill up the NetworkConfiguration model with it.
      * 
-     * @return Configuration the configuration parsed from the configuration file; null if nothing read.
+     * @return Configuration the configuration parsed from the configuration file; null if nothing
+     *         read.
      * @throws CouldNotReadConfigurationException if the file cannot be parsed.
      */
     public static NetworkConfiguration loadNetworkConfiguration()
@@ -242,6 +244,8 @@ public class Main
             configuration.setDropRate(Integer.parseInt(networkProperties.getProperty("dropRate")));
             configuration.setAverageDelayPerPacket(Integer.parseInt(networkProperties
                     .getProperty("averageDelayPerPacket")));
+            configuration.setNetworkPort(Integer.parseInt(networkProperties
+                    .getProperty("networkPort")));
 
         }
         catch (FileNotFoundException e)
