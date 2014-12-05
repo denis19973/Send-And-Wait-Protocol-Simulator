@@ -45,7 +45,7 @@ public class Network
         DatagramSocket socket = null;
         try
         {
-            socket = UDPNetwork.createServer(9000);
+            socket = UDPNetwork.createServer(configuration.getNetworkPort());
         }
         catch (SocketException e)
         {
