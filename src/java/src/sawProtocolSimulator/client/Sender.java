@@ -254,6 +254,7 @@ public class Sender extends Client
             {
                 Packet packet = UDPNetwork.getPacket(Sender.this.listen);
 
+                //if an ACK received, log and remove from the window.
                 if (packet.getPacketType() == PacketUtilities.PACKET_ACK)
                 {
                     Log.d(PacketUtilities.generateClientPacketLog(packet, false));
