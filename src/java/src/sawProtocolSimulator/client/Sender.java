@@ -206,6 +206,7 @@ public class Sender extends Client
             {
                 Packet packet = this.packetWindow.get(i);
                 this.sendPacket(packet);
+                Log.d("[RESENDING DATA]   " + PacketUtilities.generatePacketDetails(packet));
             }
 
             this.setTimerForACKs();
