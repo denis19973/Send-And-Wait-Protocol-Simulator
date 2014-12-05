@@ -52,7 +52,7 @@ public class Network
             Log.d(e.getMessage());
             System.exit(0); // fatal
         }
-        
+
         // run forever - basically
         while (runNetwork)
         {
@@ -61,7 +61,7 @@ public class Network
                 Packet packet = UDPNetwork.getPacket(socket);
 
                 totalPackets++;
-                
+
                 // if it's a control packet, let it go through.
                 if (packet.getPacketType() == 1 || packet.getPacketType() == 4)
                 {
@@ -143,9 +143,9 @@ public class Network
                 + "is below or equal to this drop rate, that packet will be dropped.");
         System.out.print("\nEnter Drop Rate (1-100):\t");
 
-        if(scan.hasNextInt())
+        if (scan.hasNextInt())
         {
-//            this.dropRate = scan.nextInt();
+            // this.dropRate = scan.nextInt();
         }
 
         System.out.println("\n\n");
@@ -156,11 +156,11 @@ public class Network
                 + "\nExample delay: 0.01 seconds");
         System.out.print("\nEnter Average Delay Per Packet (in ms):\t");
 
-        if(scan.hasNextInt())
+        if (scan.hasNextInt())
         {
-//            this.averageDelayPerPacket = scan.nextInt();
+//             this.averageDelayPerPacket = scan.nextInt();
         }
-        
+
         scan.close();
     }
 
@@ -171,12 +171,13 @@ public class Network
     {
         System.out.println("\n\n");
         System.out.println("Drop Rate (between 1 and 100): " + this.configuration.getDropRate());
-        System.out.println("Average Delay Per Packet (in ms): " + this.configuration.getAverageDelayPerPacket());
+        System.out.println("Average Delay Per Packet (in ms): "
+                + this.configuration.getAverageDelayPerPacket());
         System.out.println("Sender: " + this.configuration.getSender() + ":"
                 + this.configuration.getSenderPort());
         System.out.println("Receiver: " + this.configuration.getReceiver() + ":"
                 + this.configuration.getReceiverPort());
         System.out.println("\n\n");
     }
-    
+
 }
